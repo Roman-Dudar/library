@@ -12,14 +12,14 @@
     <h2>Login</h2>
     <form action="./login" method="POST" role="form">
         <div class="form-group">
-            <label for=>Phone number:</label>
+            <label for=><fmt:message key="library.field.phone.number" bundle="${bundle}" />:</label>
             <input type="phone-number" class="form-control" id="phone-number" placeholder="+38(012)345-67-89" name="phone-number">
         </div>
         <div class="form-group">
-            <label for="password">Password:</label>
-            <input type="password" class="form-control" id="password" placeholder="Enter password" name="password">
+            <label for="password"><fmt:message key="library.field.password" bundle="${bundle}" />:</label>
+<input type="password" class="form-control" id="password" placeholder=<fmt:message key="library.field.enter.password" bundle="${bundle}" /> name="password">
         </div>
-        <button type="submit" class="btn btn-default">Submit</button>
+        <button type="submit" class="btn btn-default"><fmt:message key="library.button.submit" bundle="${bundle}" /></button>
     </form>
 </div>
 

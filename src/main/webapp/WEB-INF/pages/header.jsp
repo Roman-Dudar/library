@@ -52,10 +52,8 @@
                     <span class="glyphicon glyphicon-globe"></span> <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
-                    <c:forEach items="${applicationScope.locales}" var="locale">
-                        <c:set var="lang" value="${locale.getLanguage()}" />
-<li><a href="${pageContext.request.contextPath}/main/locale?lang=${lang}">${lang.toUpperCase()}</a></li>
-                    </c:forEach>
+                    <li><a href="${pageContext.request.contextPath}/main/locale?lang=EN">EN</a></li>
+                    <li><a href="${pageContext.request.contextPath}/main/locale?lang=RU">RU</a></li>
                 </ul>
             </li>
             <c:choose>
