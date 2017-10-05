@@ -32,14 +32,8 @@ public class Library extends HttpServlet{
     private void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-//        request.setCharacterEncoding("UTF-8");
-//        response.setCharacterEncoding("UTF-8");
         Command command = CommandFactory.getCommand(request);
-//        try {
         String resultPath = command.execute(request, response);
         request.getRequestDispatcher(resultPath).forward(request, response);
-//        } catch (ServerAppException e) {
-//            errorPageRedirection(request, response, e);
-//        }
     }
 }
