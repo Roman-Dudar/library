@@ -1,0 +1,76 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: Dima
+  Date: 10/4/17
+  Time: 10:04 PM
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+<c:set var="lang" scope="session" value="${empty sessionScope.locale ? 'en_GB' : sessionScope.locale}" />
+<fmt:setLocale value="${lang}" scope="session" />
+<fmt:setBundle basename="/i18n/messages" var="bundle" scope="session" />
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title><fmt:message key="library.title" bundle="${bundle}" /></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+
+<body>
+
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand">
+                <fmt:message key="library.button.library" bundle="${bundle}" />
+            </a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a href="${pageContext.request.contextPath}/main/">
+                <fmt:message key="library.button.home" bundle="${bundle}" />
+            </a></li>
+            <li><a class="nav-link disabled">
+                <fmt:message key="library.button.catalog" bundle="${bundle}" />
+            </a></li>
+            <li><a class="nav-link disabled">
+                <fmt:message key="library.button.search" bundle="${bundle}" />
+            </a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <span class="glyphicon glyphicon-globe"></span> <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <c:forEach items="${applicationScope.locales}" var="locale">
+                        <c:set var="lang" value="${locale.getLanguage()}" />
+<li><a href="${pageContext.request.contextPath}/main/locale?lang=${lang}">${lang.toUpperCase()}</a></li>
+                    </c:forEach>
+                </ul>
+            </li>
+            <c:choose>
+                <c:when test="${empty user}">
+                    <li><a href="${pageContext.request.contextPath}/main/login">
+                        <span class="glyphicon glyphicon-log-in"></span>
+                        <fmt:message key="library.button.login" bundle="${bundle}" />
+                    </a></li>
+                </c:when>
+                <c:otherwise>
+                    <li><a href="${pageContext.request.contextPath}/main/logout">
+                        <span class="glyphicon glyphicon-log-out"></span>
+                        <fmt:message key="library.button.logout" bundle="${bundle}" /></a></li>
+                </c:otherwise>
+            </c:choose>
+        </ul>
+    </div>
+</nav>

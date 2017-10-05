@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+    <Resource name="jdbc/library" auth="Container"
+              type="javax.sql.DataSource" maxActive="50" maxIdle="30" maxWait="1000"
+              username="root" password="vdf4pbcd" driverClassName="com.mysql.jdbc.Driver"
+              url="jdbc:mysql://localhost/library?characterEncoding=UTF-8" />
+</Context>
