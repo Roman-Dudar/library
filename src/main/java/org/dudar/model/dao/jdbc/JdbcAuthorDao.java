@@ -8,6 +8,7 @@ import org.dudar.model.entity.Author;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
@@ -99,8 +100,8 @@ public class JdbcAuthorDao implements AuthorDao {
     public List<Author> getByBookDescriptionId(Long bookId) {
         String getByBookDescriptionIdQuery = "SELECT id, name, patronymic, surname FROM author "
             + "JOIN m2m_book_author ON m2m_book_author.author_id = author.id "
-            + "WHERE m2m_book_author.author_id = ?";
-        List<Author> authors = new ArrayList<>();
+            + "WHERE m2m_book_author.book_description_id = ?";
+        List<Author> authors = new LinkedList<>();
         try (PreparedStatement query = connection.prepareStatement(getByBookDescriptionIdQuery)) {
             query.setLong(1, bookId);
             ResultSet resultSet = query.executeQuery();

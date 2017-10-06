@@ -4,8 +4,11 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.dudar.model.dao.BookDescriptionDao;
 import org.dudar.model.entity.BookDescription;
+import org.dudar.model.entity.enums.Availability;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class JdbcBookDescriptionDao implements BookDescriptionDao {
@@ -71,6 +74,31 @@ public class JdbcBookDescriptionDao implements BookDescriptionDao {
 
     public Optional<BookDescription> getById(Long key) {
         throw new UnsupportedOperationException();
+    }
+
+    public List<BookDescription> getBookDescription(int limit, int offset) {
+        String getBookDescriptionsPaginationQuery = "SELECT * FROM book_description LIMIT ? OFFSET ?";
+        List<BookDescription> bookDescriptions = new ArrayList<>(limit);
+        try (PreparedStatement query = connection.prepareStatement(getBookDescriptionsPaginationQuery)) {
+            query.setInt(1, limit);
+            query.setInt(2, offset);
+            ResultSet resultSet = query.executeQuery();
+            while (resultSet.next()) {
+                bookDescriptions.add(parseResultSet(resultSet));
+            }
+        } catch (SQLException e) {
+            LOGGER.error("Get book description pagination: limit = " + limit + ", offset = " + offset, e);
+        }
+        return bookDescriptions;
+    }
+
+    private BookDescription parseResultSet(ResultSet resultSet) throws SQLException {
+        return new BookDescription.Builder().setId(resultSet.getLong("id"))
+                .setIsbn(resultSet.getString("isbn"))
+                .setTitle(resultSet.getString("title"))
+                .setAvailability(Availability.valueOf(resultSet.getString("availability").toUpperCase()))
+                .setPublisher(resultSet.getString("publisher"))
+                .build();
     }
 
     public void close() {

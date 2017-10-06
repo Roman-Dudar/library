@@ -27,6 +27,7 @@ public class CommandFactory {
         commands.put("POST:login", new PostLoginCommand());
         commands.put("GET:logout", new LogoutCommand());
         commands.put("GET:locale", new ChangeLocaleCommand());
+        commands.put("GET:catalog", new GetCatalogCommand());
     }
 
 

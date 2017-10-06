@@ -39,7 +39,7 @@
             <li><a href="${pageContext.request.contextPath}/main/">
                 <fmt:message key="library.button.home" bundle="${bundle}" />
             </a></li>
-            <li><a class="nav-link disabled">
+            <li><a href="${pageContext.request.contextPath}/main/catalog">
                 <fmt:message key="library.button.catalog" bundle="${bundle}" />
             </a></li>
             <li><a class="nav-link disabled">

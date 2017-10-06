@@ -2,7 +2,7 @@ package org.dudar.model.entity.enums;
 
 public enum Availability {
 
-    READING_ROOM("enum.status.reading_room"), SUBSCRIPTION("enum.status.subscription");
+    READING_ROOM("library.availability.reading_room"), SUBSCRIPTION("library.availability.subscription");
 
 
 

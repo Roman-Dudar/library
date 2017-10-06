@@ -5,7 +5,11 @@ import org.apache.log4j.Logger;
 import org.dudar.model.dao.BookDescriptionDao;
 import org.dudar.model.dao.DaoConnection;
 import org.dudar.model.dao.DaoFactory;
+import org.dudar.model.dao.jdbc.JdbcBookDescriptionDao;
 import org.dudar.model.entity.BookDescription;
+
+import java.sql.Connection;
+import java.util.List;
 
 public class BookDescriptionService {
 
@@ -33,6 +37,18 @@ public class BookDescriptionService {
             BookDescriptionDao bookDescriptionDao = daoFactory.createBookDescriptionDao(connection);
             bookDescriptionDao.create(bookDescription);
         }
+    }
+
+    public List<BookDescription> getBookDescription(int limit, int offset){
+        List<BookDescription> books;
+        try (DaoConnection connection = daoFactory.getConnection()) {
+            books = daoFactory.createBookDescriptionDao(connection).getBookDescription(limit, offset);
+            AuthorService as = AuthorService.getInstance();
+            for (BookDescription book: books) {
+                book.setAuthors(as.getByBookDescription(book));
+            }
+        }
+        return books;
     }
     
 }

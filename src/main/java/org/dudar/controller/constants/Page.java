@@ -13,4 +13,5 @@ public final class Page {
 
     public static String CHANGE_PASSWORD_VIEW = PREFIX + "changePassword" + SUFFIX;
     public static String LOGIN_PAGE = PREFIX + "login" + SUFFIX;
+    public static String CATALOG = PREFIX + "catalog" + SUFFIX;
 }

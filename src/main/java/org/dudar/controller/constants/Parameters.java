@@ -24,5 +24,6 @@ public final class Parameters {
     public static String PASSWORD = "password";
     public static String USER_PHONE_NUMBER = "userPhonenumber";
     public static String LOCALE = "locale";
+    public static String BOOKS = "books";
 
 }
