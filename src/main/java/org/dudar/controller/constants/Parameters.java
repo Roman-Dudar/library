@@ -1,9 +1,6 @@
 package org.dudar.controller.constants;
 
 public final class Parameters {
-
-    private Parameters(){}
-
     /**
      * strings used in generating urls
      */
@@ -25,5 +22,9 @@ public final class Parameters {
     public static String USER_PHONE_NUMBER = "userPhonenumber";
     public static String LOCALE = "locale";
     public static String BOOKS = "books";
+    public static String PAGE_NUMBER = "page";
+
+
+    private Parameters(){}
 
 }

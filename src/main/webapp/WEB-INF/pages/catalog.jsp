@@ -40,7 +40,12 @@
 </div>
 
 <ul class="pager">
-    <li><a href="#">Previous</a></li>
-    <li><a href="#">Next</a></li>
+    <li><a href="${pageContext.request.contextPath}/main/catalog?page=${page - 1}">
+        <fmt:message key="library.previous_page" bundle="${bundle}" />
+    </a></li>
+    <li><a href="${pageContext.request.contextPath}/main/catalog?page=${page + 1}">
+        <fmt:message key="library.next_page" bundle="${bundle}" />
+    </a></li>
 </ul>
+
 <%@include file="footer.jsp"%>

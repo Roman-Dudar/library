@@ -39,7 +39,8 @@ public class BookDescriptionService {
         }
     }
 
-    public List<BookDescription> getBookDescription(int limit, int offset){
+    public List<BookDescription> getBookDescription(int limit, int pageNumber){
+        int offset = (pageNumber - 1) * limit;
         List<BookDescription> books;
         try (DaoConnection connection = daoFactory.getConnection()) {
             books = daoFactory.createBookDescriptionDao(connection).getBookDescription(limit, offset);

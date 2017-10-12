@@ -4,6 +4,7 @@ import org.dudar.controller.command.implementation.*;
 import org.dudar.controller.command.implementation.account.GetLoginCommand;
 import org.dudar.controller.command.implementation.account.LogoutCommand;
 import org.dudar.controller.command.implementation.account.PostLoginCommand;
+import org.dudar.controller.command.implementation.catalog.GetCatalogCommand;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;

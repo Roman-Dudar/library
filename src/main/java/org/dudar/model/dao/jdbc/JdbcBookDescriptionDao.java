@@ -77,7 +77,7 @@ public class JdbcBookDescriptionDao implements BookDescriptionDao {
     }
 
     public List<BookDescription> getBookDescription(int limit, int offset) {
-        String getBookDescriptionsPaginationQuery = "SELECT * FROM book_description LIMIT ? OFFSET ?";
+        String getBookDescriptionsPaginationQuery = "SELECT SQL_CALC_FOUND_ROWS * FROM book_description LIMIT ? OFFSET ?";
         List<BookDescription> bookDescriptions = new ArrayList<>(limit);
         try (PreparedStatement query = connection.prepareStatement(getBookDescriptionsPaginationQuery)) {
             query.setInt(1, limit);
