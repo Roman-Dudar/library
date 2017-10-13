@@ -22,16 +22,22 @@
         </thead>
         <tbody>
         <c:forEach items="${books}" var="book" varStatus="status">
-            <tr onclick="window.location.href = 'google.com';" style="cursor: pointer">
+            <tr>
                 <td>${book.getId()}</td>
-                <td>${book.getTitle()}</td>
+                <td><a href="${pageContext.request.contextPath}/main/order?bookid=${book.getId()}">
+                        ${book.getTitle()}
+                </a></td>
                 <td>
                     <c:forEach items="${book.getAuthors()}" var="author">
-                        ${author.getName()} ${author.getSurname()}<br />
+                        <a href="${pageContext.request.contextPath}/main/search?author=${author.getId()}">
+                                ${author.getName()} ${author.getSurname()}
+                        </a><br />
                     </c:forEach>
                 </td>
                 <td>${book.getPublisher()}</td>
-                <td>${book.getGenre()}</td>
+                <td><a href="${pageContext.request.contextPath}/main/search?genre=${book.getGenre()}">
+                        ${book.getGenre()}
+                </a></td>
                 <td><fmt:message key="${book.getAvailability().getLocaleKey()}" bundle="${bundle}" /></td>
             </tr>
         </c:forEach>
@@ -47,5 +53,6 @@
         <fmt:message key="library.next_page" bundle="${bundle}" />
     </a></li>
 </ul>
+
 
 <%@include file="footer.jsp"%>

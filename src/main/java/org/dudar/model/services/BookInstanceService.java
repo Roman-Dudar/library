@@ -2,7 +2,9 @@ package org.dudar.model.services;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.dudar.model.dao.BookDescriptionDao;
 import org.dudar.model.dao.BookInstanceDao;
+import org.dudar.model.dao.DaoConnection;
 import org.dudar.model.dao.DaoFactory;
 import org.dudar.model.dao.jdbc.JdbcBookInstanceDao;
 import org.dudar.model.entity.BookDescription;
@@ -55,6 +57,16 @@ public class BookInstanceService {
     public List<BookInstance> getByBookDescription(BookDescription bookDescription) {
         LOGGER.info("Get book instances by book description #" + bookDescription.getId());
         List<BookInstance> instances;
+        try (BookInstanceDao bookInstanceDao = daoFactory.createBookInstanceDao()) {
+            instances = bookInstanceDao.getByBookDescription(bookDescription);
+        }
+        return instances;
+    }
+
+    public List<BookInstance> getByBookDescriptionId(Long bookDescriptionId) {
+        LOGGER.info("Get book instances by book description id: " + bookDescriptionId);
+        List<BookInstance> instances;
+        BookDescription bookDescription = daoFactory.createBookDescriptionDao().getById(bookDescriptionId).get();
         try (BookInstanceDao bookInstanceDao = daoFactory.createBookInstanceDao()) {
             instances = bookInstanceDao.getByBookDescription(bookDescription);
         }

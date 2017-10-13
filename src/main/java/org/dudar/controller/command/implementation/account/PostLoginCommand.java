@@ -23,16 +23,14 @@ public class PostLoginCommand implements Command{
     public String execute(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        HttpSession session = request.getSession();
-        if (session.getAttribute(Parameters.USER) != null) {
+        if (request.getAttribute(Parameters.USER) != null) {
             return Page.HOME;
         }
+
         LoginDto loginDto = getUserInput(request);
 
         if (!validateUserInput(loginDto)) {
-            if (loginDto.getPassword() != null)
-                request.setAttribute(Parameters.USER_PHONE_NUMBER, loginDto.getPhoneNumber());
-            request.setAttribute(Parameters.ERROR, LocaleManager.getString(LocaleMessage.INVALID_LOGIN_DATA));
+            request.setAttribute(Parameters.ERROR, LocaleMessage.INVALID_LOGIN_DATA);
             return Page.LOGIN_PAGE;
         }
 

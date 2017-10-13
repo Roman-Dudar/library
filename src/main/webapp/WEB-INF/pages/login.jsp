@@ -9,7 +9,7 @@
 
 
 <div class="container">
-    <h2>Login</h2>
+    <h2><fmt:message key="library.login" bundle="${bundle}" /></h2>
     <form action="./login" method="POST" role="form">
         <div class="form-group">
             <label for=><fmt:message key="library.field.phone.number" bundle="${bundle}" />:</label>
@@ -23,6 +23,13 @@
     </form>
 </div>
 
+<c:if test="${not empty error}">
+    <div class="alert alert-danger" align="center">
+        <strong>
+            <fmt:message key="${error}" bundle="${bundle}" />
+        </strong>
+    </div>
+</c:if>
 
 
 <%@include file="footer.jsp"%>

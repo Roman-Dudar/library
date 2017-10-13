@@ -1,9 +1,7 @@
 package org.dudar.controller.command;
 
 import org.dudar.controller.command.implementation.*;
-import org.dudar.controller.command.implementation.account.GetLoginCommand;
-import org.dudar.controller.command.implementation.account.LogoutCommand;
-import org.dudar.controller.command.implementation.account.PostLoginCommand;
+import org.dudar.controller.command.implementation.account.*;
 import org.dudar.controller.command.implementation.catalog.GetCatalogCommand;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,6 +27,9 @@ public class CommandFactory {
         commands.put("GET:logout", new LogoutCommand());
         commands.put("GET:locale", new ChangeLocaleCommand());
         commands.put("GET:catalog", new GetCatalogCommand());
+        commands.put("GET:order", new GetOrderCommand());
+        commands.put("GET:signUp", new GetSignUpCommand());
+        commands.put("POST:signUp", new PostSignUpCommand());
     }
 
 

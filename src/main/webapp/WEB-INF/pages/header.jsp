@@ -37,14 +37,19 @@
         </div>
         <ul class="nav navbar-nav">
             <li><a href="${pageContext.request.contextPath}/main/">
-                <fmt:message key="library.button.home" bundle="${bundle}" />
+                <fmt:message key="library.button.home" bundle="${bundle}"/>
             </a></li>
             <li><a href="${pageContext.request.contextPath}/main/catalog?page=1">
-                <fmt:message key="library.button.catalog" bundle="${bundle}" />
+                <fmt:message key="library.button.catalog" bundle="${bundle}"/>
             </a></li>
             <li><a class="nav-link disabled">
-                <fmt:message key="library.button.search" bundle="${bundle}" />
+                <fmt:message key="library.button.search" bundle="${bundle}"/>
             </a></li>
+            <c:if test="${user.getRole().name() == 'LIBRARIAN'}">
+                <li><a href="${pageContext.request.contextPath}/main/signUp">
+                    <fmt:message key="library.sign_up" bundle="${bundle}"/>
+                </a></li>
+            </c:if>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
@@ -60,13 +65,13 @@
                 <c:when test="${empty user}">
                     <li><a href="${pageContext.request.contextPath}/main/login">
                         <span class="glyphicon glyphicon-log-in"></span>
-                        <fmt:message key="library.button.login" bundle="${bundle}" />
+                        <fmt:message key="library.login" bundle="${bundle}" />
                     </a></li>
                 </c:when>
                 <c:otherwise>
                     <li><a href="${pageContext.request.contextPath}/main/logout">
                         <span class="glyphicon glyphicon-log-out"></span>
-                        <fmt:message key="library.button.logout" bundle="${bundle}" /></a></li>
+                        <fmt:message key="library.logout" bundle="${bundle}" /></a></li>
                 </c:otherwise>
             </c:choose>
         </ul>

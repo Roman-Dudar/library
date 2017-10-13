@@ -31,7 +31,6 @@ public class Library extends HttpServlet{
 
     private void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         Command command = CommandFactory.getCommand(request);
         String resultPath = command.execute(request, response);
         request.getRequestDispatcher(resultPath).forward(request, response);

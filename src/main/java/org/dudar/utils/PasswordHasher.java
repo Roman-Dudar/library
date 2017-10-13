@@ -1,4 +1,4 @@
-package org.dudar.model;
+package org.dudar.utils;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;

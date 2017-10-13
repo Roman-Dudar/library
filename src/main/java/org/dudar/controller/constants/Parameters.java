@@ -23,7 +23,10 @@ public final class Parameters {
     public static String LOCALE = "locale";
     public static String BOOKS = "books";
     public static String PAGE_NUMBER = "page";
-
+    public static String BOOK_ID = "bookid";
+    public static String BOOK_INSTANCE = "book_instance";
+    public static String NAME = "name";
+    public static String SURNAME = "surname";
 
     private Parameters(){}
 

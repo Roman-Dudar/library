@@ -9,7 +9,7 @@ import org.dudar.model.dao.DaoConnection;
 import org.dudar.model.dao.DaoFactory;
 import org.dudar.model.dao.UserDao;
 import org.dudar.model.entity.User;
-import org.dudar.model.PasswordHasher;
+import org.dudar.utils.PasswordHasher;
 
 import java.util.Optional;
 

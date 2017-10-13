@@ -1,5 +1,6 @@
 package org.dudar.model.dao.jdbc;
 
+import com.sun.org.apache.regexp.internal.RE;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.dudar.model.dao.BookDescriptionDao;
@@ -72,12 +73,24 @@ public class JdbcBookDescriptionDao implements BookDescriptionDao {
         }
     }
 
-    public Optional<BookDescription> getById(Long key) {
-        throw new UnsupportedOperationException();
+    public Optional<BookDescription> getById(Long bookDescriptionId) {
+        String getByIdQuery = "SELECT * FROM book_description WHERE id = ?";
+        Optional<BookDescription> bookDescription = null;
+        try (PreparedStatement query = connection.prepareStatement(getByIdQuery)){
+            query.setLong(1, bookDescriptionId);
+            ResultSet resultSet = query.executeQuery();
+            if (resultSet.next()) {
+                bookDescription = Optional.of(parseResultSet(resultSet));
+            }
+        } catch (SQLException e) {
+            LOGGER.error("Get book description by id " + bookDescriptionId, e);
+        }
+        return bookDescription;
     }
 
     public List<BookDescription> getBookDescription(int limit, int offset) {
-        String getBookDescriptionsPaginationQuery = "SELECT SQL_CALC_FOUND_ROWS * FROM book_description LIMIT ? OFFSET ?";
+        //SQL_CALC_FOUND_ROWS
+        String getBookDescriptionsPaginationQuery = "SELECT * FROM book_description LIMIT ? OFFSET ?";
         List<BookDescription> bookDescriptions = new ArrayList<>(limit);
         try (PreparedStatement query = connection.prepareStatement(getBookDescriptionsPaginationQuery)) {
             query.setInt(1, limit);
