@@ -12,6 +12,7 @@ import org.dudar.model.entity.BookInstance;
 import org.dudar.model.entity.enums.Status;
 
 import java.util.List;
+import java.util.Optional;
 
 public class BookInstanceService {
 
@@ -71,6 +72,16 @@ public class BookInstanceService {
             instances = bookInstanceDao.getByBookDescription(bookDescription);
         }
         return instances;
+    }
+
+
+    public Optional<BookInstance> getAvailableByBookDescriptionId(Long bookDescriptionId) {
+        LOGGER.info("Get available book instance by book description id: " + bookDescriptionId);
+        Optional<BookInstance> bookInstance;
+        try (BookInstanceDao bookInstanceDao = daoFactory.createBookInstanceDao()) {
+            bookInstance = bookInstanceDao.getAvailableByBookDescriptionId(bookDescriptionId);
+        }
+        return bookInstance;
     }
 
 }

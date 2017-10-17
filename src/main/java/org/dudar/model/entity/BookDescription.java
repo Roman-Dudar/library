@@ -2,6 +2,7 @@ package org.dudar.model.entity;
 
 import org.dudar.model.entity.enums.Availability;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class BookDescription {
@@ -181,6 +182,9 @@ public class BookDescription {
         }
 
         public BookDescription build() {
+            if (authors == null) {
+                authors = new LinkedList<>();
+            }
             return new BookDescription(id, isbn, title, publisher, authors, availability, genre);
         }
     }

@@ -9,6 +9,7 @@ import org.dudar.model.dao.DaoConnection;
 import org.dudar.model.dao.DaoFactory;
 import org.dudar.model.dao.UserDao;
 import org.dudar.model.entity.User;
+import org.dudar.model.entity.enums.Role;
 import org.dudar.utils.PasswordHasher;
 
 import java.util.Optional;
@@ -32,6 +33,7 @@ public class UserService {
     public void createUser(User user){
         LOGGER.info("Create user: " + user.getName() + " " + user.getSurname());
         user.setPassword(PasswordHasher.getInstance().hashPassword(user.getPassword()));
+        user.setRole(Role.READER);
         try (UserDao userDao = daoFactory.createUserDao()) {
             userDao.create(user);
         }

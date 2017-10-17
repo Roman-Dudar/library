@@ -29,6 +29,19 @@
         </div>
         <button type="submit" class="btn btn-default"><fmt:message key="library.button.submit" bundle="${bundle}" /></button>
     </form>
+
+    <c:if test="${not empty user_id}">
+        <div class="alert alert-success">
+            <fmt:message key="library.user_id" bundle="${bundle}"/>: "${user_id}".
+        </div>
+    </c:if>
+
+    <c:if test="${not empty error}">
+        <div class="alert alert-danger">
+            <fmt:message key="${error}" bundle="${bundle}"/>
+        </div>
+    </c:if>
+
 </div>
 
 

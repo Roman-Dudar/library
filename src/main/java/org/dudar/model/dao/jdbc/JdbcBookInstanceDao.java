@@ -76,7 +76,7 @@ public class JdbcBookInstanceDao implements BookInstanceDao {
             query.setLong(1, id);
             ResultSet resultSet = query.executeQuery();
             if (resultSet.next()) {
-                bookInstance = Optional.of(parseResultSer(resultSet));
+                bookInstance = Optional.of(parseResultSet(resultSet));
             }
         } catch (SQLException e) {
             LOGGER.error("JdbcBookInstanceDao get by ID SQL exception: " + id, e);
@@ -91,7 +91,7 @@ public class JdbcBookInstanceDao implements BookInstanceDao {
             query.setLong(1, bookDescription.getId());
             ResultSet resultSet = query.executeQuery();
             while (resultSet.next()) {
-                instances.add(parseResultSer(resultSet, bookDescription));
+                instances.add(parseResultSet(resultSet, bookDescription));
             }
         } catch (SQLException e) {
             LOGGER.error("JdbcBookInstanceDao getByBookDescription SQL exception: " + bookDescription.getId(), e);
@@ -114,18 +114,50 @@ public class JdbcBookInstanceDao implements BookInstanceDao {
         }
     }
 
-    private BookInstance parseResultSer(ResultSet resultSet) throws SQLException {
+    public Optional<BookInstance> getAvailableByBookDescriptionId(Long bookDescriptionId){
+        String getAvailableQuery = "SELECT book_instance.id, book_instance.status, book_description.id, isbn, title, "
+                                 + "publisher, genre, availability, author.id, name, patronymic, surname "
+                                 + "FROM book_instance JOIN book_description ON "
+                                 + "book_instance.book_description_id = book_description.id "
+                                 + "JOIN m2m_book_author ON book_description.id = m2m_book_author.book_description_id "
+                                 + "JOIN author ON m2m_book_author.author_id = author.id WHERE "
+                                 + "book_instance.book_description_id = ? AND status = 'available' "
+                                 + "ORDER BY book_instance.id;";
+        Optional<BookInstance> bookInstance = Optional.empty();
+        try (PreparedStatement query = connection.prepareStatement(getAvailableQuery)){
+            query.setLong(1, bookDescriptionId);
+            ResultSet rs = query.executeQuery();
+            if (rs.next()) {
+                bookInstance = Optional.of(parseResultSetWithAgregation(rs));
+            }
+        } catch (SQLException e) {
+            LOGGER.error("Get available book instance by book description ID SQL exception: " + bookDescriptionId, e);
+        }
+        return bookInstance;
+    }
+
+    static BookInstance parseResultSet(ResultSet resultSet) throws SQLException {
         return new BookInstance.Builder().setId(resultSet.getLong("id"))
             .setBookDescription(new BookDescription(resultSet.getLong("book_description_id")))
             .setStatus(Status.valueOf(resultSet.getString("status").toUpperCase()))
             .build();
     }
 
-    private BookInstance parseResultSer(ResultSet resultSet, BookDescription bookDescription) throws SQLException {
+    static BookInstance parseResultSet(ResultSet resultSet, BookDescription bookDescription) throws SQLException {
         return new BookInstance.Builder().setId(resultSet.getLong("id"))
             .setBookDescription(bookDescription)
             .setStatus(Status.valueOf(resultSet.getString("status").toUpperCase()))
             .build();
+    }
+
+    static BookInstance parseResultSetWithAgregation(ResultSet resultSet) throws SQLException {
+        BookInstance bookInstance = new BookInstance.Builder().setId(resultSet.getLong("id"))
+                .setStatus(Status.valueOf(resultSet.getString("status").toUpperCase()))
+                .setBookDescription(JdbcBookDescriptionDao.parseResultSet(resultSet)).build();
+            do {
+            bookInstance.getBookDescription().addAuthor(JdbcAuthorDao.parseResultSet(resultSet));
+            } while (resultSet.next());
+        return bookInstance;
     }
 
     public void close() {

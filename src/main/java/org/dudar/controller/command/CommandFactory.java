@@ -3,6 +3,7 @@ package org.dudar.controller.command;
 import org.dudar.controller.command.implementation.*;
 import org.dudar.controller.command.implementation.account.*;
 import org.dudar.controller.command.implementation.catalog.GetCatalogCommand;
+import org.dudar.controller.command.implementation.order.GetOrderCommand;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;

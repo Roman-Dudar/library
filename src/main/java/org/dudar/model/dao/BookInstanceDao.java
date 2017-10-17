@@ -5,6 +5,7 @@ import org.dudar.model.entity.BookInstance;
 import org.dudar.model.entity.BookOrder;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface BookInstanceDao extends GenericDao<BookInstance> {
 
@@ -12,4 +13,5 @@ public interface BookInstanceDao extends GenericDao<BookInstance> {
 
     void getByBookOrder(BookOrder bookOrder);
 
+    Optional<BookInstance> getAvailableByBookDescriptionId(Long bookDescriptionId);
 }

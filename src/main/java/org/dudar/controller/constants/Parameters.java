@@ -27,6 +27,7 @@ public final class Parameters {
     public static String BOOK_INSTANCE = "book_instance";
     public static String NAME = "name";
     public static String SURNAME = "surname";
+    public static String USER_ID = "user_id";
 
     private Parameters(){}
 
