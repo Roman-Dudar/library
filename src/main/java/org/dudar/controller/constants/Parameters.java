@@ -27,7 +27,7 @@ public final class Parameters {
     public static String NAME = "name";
     public static String SURNAME = "surname";
     public static String USER_ID = "user_id";
-    public static String ORDER_TYPE = "order_type";
+    public static String BOOK_ORDER = "order";
 
     private Parameters(){}
 

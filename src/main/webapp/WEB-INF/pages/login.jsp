@@ -13,7 +13,7 @@
     <form action="./login" method="POST" role="form">
         <div class="form-group">
             <label for=><fmt:message key="library.field.phone.number" bundle="${bundle}" />:</label>
-            <input type="phone-number" class="form-control" id="phone-number" placeholder="+38(012)345-67-89" name="phone-number">
+            <input class="form-control" id="phone-number" placeholder="+38(012)345-67-89" name="phone-number">
         </div>
         <div class="form-group">
             <label for="password"><fmt:message key="library.field.password" bundle="${bundle}" />:</label>

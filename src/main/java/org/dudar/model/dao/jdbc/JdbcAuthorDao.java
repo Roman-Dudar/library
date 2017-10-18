@@ -115,7 +115,7 @@ public class JdbcAuthorDao implements AuthorDao {
     }
 
     protected static Author parseResultSet(ResultSet resultSet) throws SQLException {
-        return new Author.Builder().setId(resultSet.getLong("id"))
+        return new Author.Builder().setId(resultSet.getLong("author.id"))
                 .setName(resultSet.getString("name"))
                 .setPatronymic(resultSet.getString("patronymic"))
                 .setSurname(resultSet.getString("surname"))

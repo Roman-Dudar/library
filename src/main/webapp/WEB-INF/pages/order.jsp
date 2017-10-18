@@ -11,30 +11,32 @@
 <div class="container" align="center">
     <h2><fmt:message key="library.order" bundle="${bundle}"/></h2>
     <c:choose>
-        <c:when test="${not bookInstance.isPresent()}">
+        <c:when test="${not empty book_instance}">
             <h4>
-                <fmt:message key="library.order_book" bundle="${bundle}"/> "${book_instance.get().getBookDescription().getTitle() }"
+                <fmt:message key="library.order_book" bundle="${bundle}"/>
+                "${book_instance.getBookDescription().getTitle() }"
+                <fmt:message key="${book_instance.getBookDescription().getAvailability().getLocaleKey()}" bundle="${bundle}"/>
             </h4>
 
             <form action="./order" method="POST" role="form">
-                <label for="order_type"><fmt:message key="library.order.order_for" bundle="${bundle}"/></label>
-                <select class="form-control" id="order_type" name="order_type">
-                    <c:if test="${book_instance.get().getBookDescription().getAvailability().equals('subscription')}">
-                    <option value="subscription"><fmt:message key="library.availability.subscription" bundle="${bundle}"/></option>
-                    </c:if>
-                    <option value="reading_room"><fmt:message key="library.availability.reading_room" bundle="${bundle}"/></option>
-                </select></br>
-
+                <input type="hidden" id="bookid" name="bookid" value="${book_instance.getBookDescription().getId()}">
                 <button type="submit" class="btn btn-default"><fmt:message key="library.button.submit" bundle="${bundle}"/></button>
             </form>
         </c:when>
 
         <c:otherwise>
-            <div class="alert alert-info">
-                <strong>Sorry</strong>, book is not available right now. Try again later.
+            <div class="alert alert-warning">
+                <strong><fmt:message key="library.sorry" bundle="${bundle}"/></strong>,
+                <fmt:message key="library.order.not_available" bundle="${bundle}"/>.
             </div>
         </c:otherwise>
     </c:choose>
+
+    <c:if test="${not empty order}">
+        <div class="alert alert-warning">
+            <fmt:message key="library.order.success" bundle="${bundle}"/> <strong>"${order.getId()}"</strong>
+        </div>
+    </c:if>
 </div>
 
 

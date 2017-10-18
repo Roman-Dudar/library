@@ -14,6 +14,7 @@ import org.dudar.model.entity.enums.Status;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 public class BookOrderService {
 
@@ -46,6 +47,15 @@ public class BookOrderService {
         try (DaoConnection connection = daoFactory.getConnection()) {
             connection.begin();
             createOrder(bookOrder);
+        }
+        return bookOrder;
+    }
+
+    public Optional<BookOrder> getById(Long orderId){
+        LOGGER.info("Get by id " + orderId);
+        Optional<BookOrder> bookOrder = Optional.empty();
+        try (BookOrderDao bookOrderDao = daoFactory.createBookOrderDao()) {
+            bookOrder = bookOrderDao.getById(orderId);
         }
         return bookOrder;
     }

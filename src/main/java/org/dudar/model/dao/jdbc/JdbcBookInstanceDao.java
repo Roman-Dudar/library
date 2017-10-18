@@ -50,7 +50,7 @@ public class JdbcBookInstanceDao implements BookInstanceDao {
         String updateQuery = "UPDATE book_instance SET book_description_id = ?, status=? WHERE id = ?";
         try (PreparedStatement query = connection.prepareStatement(updateQuery)) {
             query.setLong(1, bookInstance.getBookDescription().getId());
-            query.setString(2, bookInstance.getStatus().name());
+            query.setString(2, bookInstance.getStatus().name().toLowerCase());
             query.setLong(3, bookInstance.getId());
             query.executeUpdate();
 
@@ -122,7 +122,7 @@ public class JdbcBookInstanceDao implements BookInstanceDao {
                                  + "JOIN m2m_book_author ON book_description.id = m2m_book_author.book_description_id "
                                  + "JOIN author ON m2m_book_author.author_id = author.id WHERE "
                                  + "book_instance.book_description_id = ? AND status = 'available' "
-                                 + "ORDER BY book_instance.id;";
+                                 + "ORDER BY book_instance.id";
         Optional<BookInstance> bookInstance = Optional.empty();
         try (PreparedStatement query = connection.prepareStatement(getAvailableQuery)){
             query.setLong(1, bookDescriptionId);
@@ -154,9 +154,10 @@ public class JdbcBookInstanceDao implements BookInstanceDao {
         BookInstance bookInstance = new BookInstance.Builder().setId(resultSet.getLong("id"))
                 .setStatus(Status.valueOf(resultSet.getString("status").toUpperCase()))
                 .setBookDescription(JdbcBookDescriptionDao.parseResultSet(resultSet)).build();
-            do {
+        do {
+            if (!bookInstance.getId().equals(resultSet.getLong("book_instance.id"))) {break;}
             bookInstance.getBookDescription().addAuthor(JdbcAuthorDao.parseResultSet(resultSet));
-            } while (resultSet.next());
+        } while (resultSet.next());
         return bookInstance;
     }
 

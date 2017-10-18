@@ -3,10 +3,14 @@ package org.dudar.model.dao.jdbc;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import org.dudar.model.dao.BookDescriptionDao;
 import org.dudar.model.dao.BookOrderDao;
+import org.dudar.model.entity.BookDescription;
 import org.dudar.model.entity.BookInstance;
 import org.dudar.model.entity.BookOrder;
 import org.dudar.model.entity.User;
+import org.dudar.model.entity.enums.Availability;
+import org.dudar.model.entity.enums.Status;
 
 import java.sql.*;
 import java.util.LinkedList;
@@ -68,8 +72,21 @@ public class JdbcBookOrderDao implements BookOrderDao{
         }
     }
 
-    public Optional<BookOrder> getById(Long id) {
-        throw new UnsupportedOperationException();
+    public Optional<BookOrder> getById(Long orderId) {
+        String getByIdQuery = "SELECT * FROM book_order JOIN user on book_order.user_id = user.id JOIN book_instance "
+                            + "ON book_order.book_instance_id = book_instance.id JOIN book_description ON "
+                            + "book_instance.book_description_id = book_description.id WHERE book_order.id = ?";
+        Optional<BookOrder> bookOrder = Optional.empty();
+        try (PreparedStatement query = connection.prepareStatement(getByIdQuery)) {
+            query.setLong(1, orderId);
+            ResultSet resultSet = query.executeQuery();
+            if (resultSet.next()) {
+                bookOrder = Optional.of(parseResultSetWithAgregation(resultSet));
+            }
+        } catch(SQLException e) {
+            LOGGER.error("Get order by id: " + orderId, e);
+        }
+        return bookOrder;
     }
 
     public List<BookOrder> getUnreturnedOrdersOfUser(Long userId){
@@ -128,7 +145,7 @@ public class JdbcBookOrderDao implements BookOrderDao{
         return orders;
     }
 
-    private BookOrder parseResultSet(ResultSet resultSet) throws SQLException {
+    static BookOrder parseResultSet(ResultSet resultSet) throws SQLException {
         return new BookOrder.Builder().setId(resultSet.getLong("id"))
             .setBookInstance(new BookInstance(resultSet.getLong("book_instance_id")))
             .setUser(new User(resultSet.getLong("user_id")))
@@ -137,6 +154,19 @@ public class JdbcBookOrderDao implements BookOrderDao{
             .setReturnDate(resultSet.getDate("return_date"))
             .setActualReturnDate(resultSet.getDate("actual_return_date"))
             .build();
+    }
+
+    static BookOrder parseResultSetWithAgregation(ResultSet resultSet) throws SQLException {
+        BookOrder bookOrder = new BookOrder.Builder().setId(resultSet.getLong("id"))
+                .setBookInstance(JdbcBookInstanceDao.parseResultSet(resultSet))
+                .setUser(JdbcUserDao.parseResultSet(resultSet))
+                .setCreationDate(resultSet.getDate("creation_date"))
+                .setPickupDate(resultSet.getDate("pickup_date"))
+                .setReturnDate(resultSet.getDate("return_date"))
+                .setActualReturnDate(resultSet.getDate("actual_return_date"))
+                .build();
+        bookOrder.getBookInstance().setBookDescription(JdbcBookDescriptionDao.parseResultSet(resultSet));
+        return bookOrder;
     }
 
     public void close() {

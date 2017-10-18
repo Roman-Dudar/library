@@ -106,7 +106,7 @@ public class JdbcBookDescriptionDao implements BookDescriptionDao {
     }
 
     protected static BookDescription parseResultSet(ResultSet resultSet) throws SQLException {
-        return new BookDescription.Builder().setId(resultSet.getLong("id"))
+        return new BookDescription.Builder().setId(resultSet.getLong("book_description.id"))
                 .setIsbn(resultSet.getString("isbn"))
                 .setTitle(resultSet.getString("title"))
                 .setAvailability(Availability.valueOf(resultSet.getString("availability").toUpperCase()))

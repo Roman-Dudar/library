@@ -97,8 +97,8 @@ public class JdbcUserDao implements UserDao {
         return user;
     }
 
-    private User parseResultSet(ResultSet resultSet) throws SQLException {
-        return new User.Builder().setId(resultSet.getLong("id"))
+    static User parseResultSet(ResultSet resultSet) throws SQLException {
+        return new User.Builder().setId(resultSet.getLong("user.id"))
                                      .setName(resultSet.getString("name"))
                                      .setSurname(resultSet.getString("surname"))
                                      .setPhoneNumber(resultSet.getString("phone_number"))
