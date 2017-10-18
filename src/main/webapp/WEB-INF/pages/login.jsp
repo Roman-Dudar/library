@@ -9,7 +9,7 @@
 
 
 <div class="container" align="center">
-    <h2><fmt:message key="library.login" bundle="${bundle}" /></h2>
+    <h2><fmt:message key="library.login" bundle="${bundle}"/></h2>
     <form action="./login" method="POST" role="form">
         <div class="form-group">
             <label for=><fmt:message key="library.field.phone.number" bundle="${bundle}" />:</label>
@@ -17,19 +17,15 @@
         </div>
         <div class="form-group">
             <label for="password"><fmt:message key="library.field.password" bundle="${bundle}" />:</label>
-<input type="password" class="form-control" id="password" placeholder=<fmt:message key="library.field.enter.password" bundle="${bundle}" /> name="password">
+            <input type="password" class="form-control" id="password"
+                   placeholder=<fmt:message key="library.field.enter.password" bundle="${bundle}"/>
+                           name="password">
         </div>
         <button type="submit" class="btn btn-default"><fmt:message key="library.button.submit" bundle="${bundle}" /></button>
     </form>
 </div>
 
-<c:if test="${not empty error}">
-    <div class="alert alert-danger" align="center">
-        <strong>
-            <fmt:message key="${error}" bundle="${bundle}" />
-        </strong>
-    </div>
-</c:if>
 
+<%@include file="error.jsp"%>
 
 <%@include file="footer.jsp"%>

@@ -44,16 +44,13 @@ public class BookOrderService {
         LOGGER.info("Order book instance " + bookInstance.getId());
         BookInstanceService.getInstance().orderBookInstance(bookInstance);
         BookOrder bookOrder = new BookOrder.Builder().setBookInstance(bookInstance).setUser(user).build();
-        try (DaoConnection connection = daoFactory.getConnection()) {
-            connection.begin();
-            createOrder(bookOrder);
-        }
+        createOrder(bookOrder);
         return bookOrder;
     }
 
     public Optional<BookOrder> getById(Long orderId){
         LOGGER.info("Get by id " + orderId);
-        Optional<BookOrder> bookOrder = Optional.empty();
+        Optional<BookOrder> bookOrder;
         try (BookOrderDao bookOrderDao = daoFactory.createBookOrderDao()) {
             bookOrder = bookOrderDao.getById(orderId);
         }

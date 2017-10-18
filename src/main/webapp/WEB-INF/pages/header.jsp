@@ -50,6 +50,10 @@
                 <li><a href="${pageContext.request.contextPath}/main/signUp">
                     <fmt:message key="library.sign_up" bundle="${bundle}"/>
                 </a></li>
+
+                <li><a href="${pageContext.request.contextPath}/main/findOrder">
+                    <fmt:message key="library.order.find" bundle="${bundle}"/>
+                </a></li>
             </c:if>
         </ul>
         <ul class="nav navbar-nav navbar-right">

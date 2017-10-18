@@ -13,6 +13,8 @@ public final class Page {
     public static String CATALOG = PREFIX + "catalog" + SUFFIX;
     public static String ORDER = PREFIX + "order" + SUFFIX;
     public static String SIGN_UP = PREFIX + "signUp" + SUFFIX;
+    public static String FIND_ORDER = PREFIX + "findOrder" + SUFFIX;
+    public static String CONFIRM_ORDER = PREFIX + "confirmOrder" + SUFFIX;
 
 
     private Page() {

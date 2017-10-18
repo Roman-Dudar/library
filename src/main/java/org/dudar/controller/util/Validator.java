@@ -26,4 +26,12 @@ public class Validator {
         }
         return true;
     }
+
+    public boolean validateId(String id) {
+        String idRegex = "^\\d+$";
+        if (id == null || !id.matches(idRegex)) {
+            return false;
+        }
+        return true;
+    }
 }

@@ -9,17 +9,19 @@
 
 
 <div class="container" align="center">
+    <h2><fmt:message key="library.order.find" bundle="${bundle}"/></h2>
+    <br/>
     <form action="./findOrder" method="POST" role="form">
         <div class="form-group">
             <label for="order_id"><fmt:message key="library.order.enter_id" bundle="${bundle}"/> </label>
-            <input type="text" class="form-control" id="order_id">
+            <input class="form-control" id="order_id" type="number" name="order_id">
         </div>
 
-        <div class="form-group">
-            <button type="submit" class="btn btn-default"><fmt:message key="library.button.submit" bundle="${bundle}"/></button>
-        </div>
+        <button type="submit" class="btn btn-default"><fmt:message key="library.button.submit" bundle="${bundle}"/></button>
     </form>
 </div>
 
+
+<%@include file="error.jsp"%>
 
 <%@include file="footer.jsp"%>
