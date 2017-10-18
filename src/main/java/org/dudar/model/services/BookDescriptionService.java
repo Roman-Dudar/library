@@ -39,7 +39,8 @@ public class BookDescriptionService {
         }
     }
 
-    public List<BookDescription> getBookDescription(int limit, int pageNumber){
+    public List<BookDescription> getBookDescription(int pageNumber){
+        int limit = DaoFactory.LIMIT;
         int offset = (pageNumber - 1) * limit;
         List<BookDescription> books;
 

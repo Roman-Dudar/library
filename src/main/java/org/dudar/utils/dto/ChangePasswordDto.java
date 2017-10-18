@@ -1,4 +1,4 @@
-package org.dudar.dto;
+package org.dudar.utils.dto;
 
 import org.dudar.model.entity.IBuilder;
 

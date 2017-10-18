@@ -2,7 +2,7 @@ package org.dudar.model.dao.jdbc;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.dudar.model.exception.DatabaseException;
+import org.dudar.exception.DatabaseException;
 import org.dudar.model.dao.*;
 
 import javax.naming.InitialContext;

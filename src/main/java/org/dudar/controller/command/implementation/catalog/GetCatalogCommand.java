@@ -1,9 +1,6 @@
 package org.dudar.controller.command.implementation.catalog;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
 import org.dudar.controller.command.Command;
-import org.dudar.controller.constants.AppConstants;
 import org.dudar.controller.constants.Page;
 import org.dudar.controller.constants.Parameters;
 import org.dudar.model.entity.BookDescription;
@@ -20,7 +17,7 @@ public class GetCatalogCommand implements Command{
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int pageNumber = Integer.parseInt(request.getParameter(Parameters.PAGE_NUMBER));
-        List<BookDescription> books = BookDescriptionService.getInstance().getBookDescription(AppConstants.LIMIT, pageNumber);
+        List<BookDescription> books = BookDescriptionService.getInstance().getBookDescription(pageNumber);
         request.setAttribute(Parameters.BOOKS, books);
         return Page.CATALOG;
     }

@@ -3,8 +3,8 @@ package org.dudar.model.services;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import org.dudar.dto.ChangePasswordDto;
-import org.dudar.dto.LoginDto;
+import org.dudar.utils.dto.ChangePasswordDto;
+import org.dudar.utils.dto.LoginDto;
 import org.dudar.model.dao.DaoConnection;
 import org.dudar.model.dao.DaoFactory;
 import org.dudar.model.dao.UserDao;

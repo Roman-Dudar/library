@@ -1,6 +1,4 @@
-package org.dudar.dto;
-
-import org.dudar.model.entity.IBuilder;
+package org.dudar.utils.dto;
 
 public class LoginDto {
 

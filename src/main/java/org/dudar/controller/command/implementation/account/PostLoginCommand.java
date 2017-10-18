@@ -3,17 +3,15 @@ package org.dudar.controller.command.implementation.account;
 import org.dudar.controller.command.Command;
 import org.dudar.controller.constants.Page;
 import org.dudar.controller.constants.Parameters;
-import org.dudar.controller.util.Validator;
-import org.dudar.dto.LoginDto;
+import org.dudar.utils.Validator;
+import org.dudar.utils.dto.LoginDto;
 import org.dudar.model.entity.User;
 import org.dudar.model.services.UserService;
-import org.dudar.utils.LocaleManager;
 import org.dudar.utils.LocaleMessage;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 public class PostLoginCommand implements Command{
@@ -47,7 +45,8 @@ public class PostLoginCommand implements Command{
     }
 
     private boolean validateUserInput(LoginDto loginDto) {
-        return Validator.getInstance().validatePhoneNumber(loginDto.getPhoneNumber());
+        return (Validator.getInstance().validatePhoneNumber(loginDto.getPhoneNumber()) &&
+            loginDto.getPassword() != null && !loginDto.getPassword().isEmpty());
 
     }
 }

@@ -1,4 +1,4 @@
-package org.dudar.model.exception;
+package org.dudar.exception;
 
 public class DatabaseException extends RuntimeException{
 

@@ -10,7 +10,6 @@ import org.apache.log4j.*;
  * Abstract class that represents abstract dao factory that can construct
  * various types of concrete Dao factories that support different types of
  * persistent storage access implementation.
- * <p>
  * 
  * Each concrete dao factory that support particular kind of persistent storage access
  * implementation has to extend this abstract class
@@ -21,11 +20,10 @@ import org.apache.log4j.*;
 public abstract class DaoFactory {
 
 	private static final Logger LOGGER = LogManager.getLogger(DaoFactory.class);
-
-	public static final String DB_FILE = "/db.properties";
+	private static final String DB_FILE = "/db.properties";
 	private static final String DB_FACTORY_CLASS = "factory.class";
-
 	private static DaoFactory daoFactory;
+    public static int LIMIT;
 
 	public abstract DaoConnection getConnection();
 
@@ -63,6 +61,7 @@ public abstract class DaoFactory {
 				Properties dbProps = new Properties();
 				dbProps.load(inputStream);
 				String factoryClass = dbProps.getProperty(DB_FACTORY_CLASS);
+				LIMIT = Integer.parseInt(dbProps.getProperty("limit"));
 				daoFactory = (DaoFactory) Class.forName(factoryClass).newInstance();
 
 			} catch (IOException | IllegalAccessException | InstantiationException | ClassNotFoundException e) {
