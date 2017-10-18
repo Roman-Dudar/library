@@ -42,9 +42,16 @@ public class BookInstanceService {
 
     public void setStatus(BookInstance bookInstance, Status status) {
         LOGGER.info("Set book instance #" + bookInstance.getId() + " status: " + status.name().toLowerCase());
-        try (BookInstanceDao bookInstanceDao = daoFactory.createBookInstanceDao()) {
-            bookInstance.setStatus(status);
-            bookInstanceDao.update(bookInstance);
+        try (DaoConnection connection = daoFactory.getConnection()) {
+            BookInstanceDao bookInstanceDao = daoFactory.createBookInstanceDao(connection);
+            connection.begin();
+            if (bookInstanceDao.getById(bookInstance.getId()).get().getStatus().equals(bookInstance.getStatus())) {
+                bookInstance.setStatus(status);
+                bookInstanceDao.update(bookInstance);
+            } else {
+                throw new RuntimeException("Too late");//todo-Dmitry fix it later!
+            }
+            connection.commit();
         }
     }
 
@@ -82,6 +89,11 @@ public class BookInstanceService {
             bookInstance = bookInstanceDao.getAvailableByBookDescriptionId(bookDescriptionId);
         }
         return bookInstance;
+    }
+
+    public void orderBookInstance(BookInstance bookInstance) {
+        LOGGER.info("Order book instance #" + bookInstance.getId());
+        setStatus(bookInstance, Status.UNAVAILABLE);
     }
 
 }

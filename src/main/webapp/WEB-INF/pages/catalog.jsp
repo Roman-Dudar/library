@@ -31,7 +31,7 @@
                     <c:forEach items="${book.getAuthors()}" var="author">
                         <a href="${pageContext.request.contextPath}/main/search?author=${author.getId()}">
                                 ${author.getName()} ${author.getSurname()}
-                        </a><br />
+                        </a><br/>
                     </c:forEach>
                 </td>
                 <td>${book.getPublisher()}</td>

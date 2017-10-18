@@ -14,7 +14,6 @@ public final class Parameters {
      * strings used as parameters in jsp pages
      */
     public static String ERROR = "error";
-    public static String SUCCESS = "success";
     public static String LANG = "lang";
     public static String USER = "user";
     public static String PHONE_NUMBER = "phone-number";
@@ -28,6 +27,7 @@ public final class Parameters {
     public static String NAME = "name";
     public static String SURNAME = "surname";
     public static String USER_ID = "user_id";
+    public static String ORDER_TYPE = "order_type";
 
     private Parameters(){}
 

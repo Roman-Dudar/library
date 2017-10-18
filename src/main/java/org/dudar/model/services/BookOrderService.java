@@ -3,10 +3,13 @@ package org.dudar.model.services;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.dudar.model.dao.BookOrderDao;
+import org.dudar.model.dao.DaoConnection;
 import org.dudar.model.dao.DaoFactory;
 import org.dudar.model.entity.BookDescription;
+import org.dudar.model.entity.BookInstance;
 import org.dudar.model.entity.BookOrder;
 import org.dudar.model.entity.User;
+import org.dudar.model.entity.enums.Status;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -16,9 +19,15 @@ public class BookOrderService {
 
     private static final Logger LOGGER = LogManager.getLogger(BookOrderService.class);
 
+    private static BookOrderService instance = new BookOrderService(DaoFactory.getDaoFactory());
+
+    public static BookOrderService getInstance(){
+        return instance;
+    }
+
     private DaoFactory daoFactory;
 
-    public BookOrderService(DaoFactory daoFactory) {
+    private BookOrderService(DaoFactory daoFactory) {
         this.daoFactory = daoFactory;
     }
 
@@ -28,6 +37,17 @@ public class BookOrderService {
             bookOrder.setCreationDate(Date.valueOf(LocalDate.now()));
             bookOrderDao.create(bookOrder);
         }
+    }
+
+    public BookOrder orderBookInstance(BookInstance bookInstance, User user) {
+        LOGGER.info("Order book instance " + bookInstance.getId());
+        BookInstanceService.getInstance().orderBookInstance(bookInstance);
+        BookOrder bookOrder = new BookOrder.Builder().setBookInstance(bookInstance).setUser(user).build();
+        try (DaoConnection connection = daoFactory.getConnection()) {
+            connection.begin();
+            createOrder(bookOrder);
+        }
+        return bookOrder;
     }
 
     public void confirmPickUp(BookOrder bookOrder) {

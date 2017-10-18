@@ -4,6 +4,7 @@ import org.dudar.controller.command.implementation.*;
 import org.dudar.controller.command.implementation.account.*;
 import org.dudar.controller.command.implementation.catalog.GetCatalogCommand;
 import org.dudar.controller.command.implementation.order.GetOrderCommand;
+import org.dudar.controller.command.implementation.order.PostOrderCommand;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -31,6 +32,7 @@ public class CommandFactory {
         commands.put("GET:order", new GetOrderCommand());
         commands.put("GET:signUp", new GetSignUpCommand());
         commands.put("POST:signUp", new PostSignUpCommand());
+        commands.put("POST:order", new PostOrderCommand());
     }
 
 

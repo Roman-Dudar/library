@@ -21,7 +21,7 @@ public class GetOrderCommand implements Command{
         return Page.ORDER;
     }
 
-    private Optional<BookInstance> getAvailableBookInstance(HttpServletRequest request) {
+    static Optional<BookInstance> getAvailableBookInstance(HttpServletRequest request) {
         int bookId = Integer.parseInt(request.getParameter(Parameters.BOOK_ID));
         Optional<BookInstance> bookInstance = BookInstanceService.getInstance()
                 .getAvailableByBookDescriptionId(new Long(bookId));

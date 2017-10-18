@@ -1,4 +1,5 @@
 <%--
+  русский
   Created by IntelliJ IDEA.
   User: Dima
   Date: 10/4/17
@@ -8,10 +9,10 @@
 <%@include file="/WEB-INF/pages/header.jsp"%>
 
 <h2 align="center">
-    <fmt:message key="library.welcome.header" bundle="${bundle}" />
+    <fmt:message key="library.welcome.header" bundle="${bundle}"/>
 </h2>
 <h4 align="center">
-    <fmt:message key="library.welcome.text" bundle="${bundle}" />
+    <fmt:message key="library.welcome.text" bundle="${bundle}"/>
 </h4>
 
 <%@include file="/WEB-INF/pages/footer.jsp"%>

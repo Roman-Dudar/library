@@ -8,7 +8,7 @@
 <%@include file="header.jsp"%>
 
 
-<div class="container">
+<div class="container" align="center">
     <h2><fmt:message key="library.login" bundle="${bundle}" /></h2>
     <form action="./login" method="POST" role="form">
         <div class="form-group">
