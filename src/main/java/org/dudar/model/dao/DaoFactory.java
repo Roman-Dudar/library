@@ -19,7 +19,6 @@ import org.apache.log4j.*;
  *
  */
 public abstract class DaoFactory {
-	//todo-Dmitry finish DaoFactory
 
 	private static final Logger LOGGER = LogManager.getLogger(DaoFactory.class);
 

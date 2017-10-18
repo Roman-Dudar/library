@@ -29,6 +29,8 @@ public final class Parameters {
     public static String USER_ID = "user_id";
     public static String BOOK_ORDER = "order";
     public static String ORDER_ID = "order_id";
+    public static String CONFIRM = "confirm";
+
 
     private Parameters(){}
 

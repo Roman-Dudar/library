@@ -35,7 +35,6 @@ public class AuthorService {
         }
     }
 
-    //todo-Dmitry can u delete this?
     public List<Author> getAuthorBySurnameBeginning(String surnameBeginning) {
         LOGGER.info("Get authors by surname beginning: " + surnameBeginning);
         List<Author> authors;

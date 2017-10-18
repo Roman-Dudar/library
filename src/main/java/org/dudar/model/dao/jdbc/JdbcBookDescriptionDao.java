@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Optional;
 
 public class JdbcBookDescriptionDao implements BookDescriptionDao {
-    //todo-Dmitry create JdbcBookDescriptionDao
 
     private static final Logger LOGGER = LogManager.getLogger(JdbcBookOrderDao.class);
 

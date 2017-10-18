@@ -21,5 +21,9 @@ public class PostConfirmOrderCommand implements Command{
         return Page.CONFIRM_ORDER;
     }
 
-
+    private boolean confirmOrder(HttpServletRequest request) {
+        String option = request.getParameter(Parameters.CONFIRM);
+        
+        return false;
+    }
 }

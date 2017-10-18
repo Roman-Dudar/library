@@ -79,7 +79,6 @@ public class BookOrderService {
         List<BookOrder> resultList;
         try (BookOrderDao bookOrderDao = daoFactory.createBookOrderDao()) {
             resultList = bookOrderDao.getUnreturnedOrdersOfUser(userId);
-            //todo-Dmitry get book instances for resultList of orders;
         }
         return resultList;
     }
@@ -93,7 +92,6 @@ public class BookOrderService {
         List<BookOrder> resultList;
         try (BookOrderDao bookOrderDao = daoFactory.createBookOrderDao()) {
             resultList = bookOrderDao.getAllByUser(userId);
-            //todo-Dmitry get book instances for resultList of orders;
         }
         return resultList;
     }
@@ -107,7 +105,6 @@ public class BookOrderService {
         List<BookOrder> resultList;
         try (BookOrderDao bookOrderDao = daoFactory.createBookOrderDao()) {
             resultList = bookOrderDao.getByBookDescription(bookDescriptionId);
-            //todo-Dmitry get book instances for resultList of orders;
         }
         return resultList;
     }
