@@ -7,7 +7,7 @@ import org.dudar.utils.Validator;
 import org.dudar.utils.dto.LoginDto;
 import org.dudar.model.entity.User;
 import org.dudar.model.services.UserService;
-import org.dudar.utils.LocaleMessage;
+import org.dudar.utils.locale.LocaleMessage;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

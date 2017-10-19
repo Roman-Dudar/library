@@ -1,4 +1,4 @@
-package org.dudar.utils;
+package org.dudar.utils.locale;
 
 public class LocaleMessage {
 
@@ -9,7 +9,11 @@ public class LocaleMessage {
     public static String INVALID_INPUT = "library.input.error";
     public static String ORDER_NOT_FOUND = "library.order.not_found";
     public static String SUCCESS = "library.success";
-
+    public static String TITLE = "library.bookDescription.title";
+    public static String AUTHORS = "library.bookDescription.authors";
+    public static String PUBLISHER = "library.bookDescription.publisher";
+    public static String GENRE = "library.bookDescription.genre";
+    public static String AVAILABILITY = "library.bookDescription.availability";
 
 
     private LocaleMessage() {}

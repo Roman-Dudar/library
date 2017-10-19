@@ -5,7 +5,7 @@ import org.dudar.controller.constants.Page;
 import org.dudar.controller.constants.Parameters;
 import org.dudar.model.entity.BookOrder;
 import org.dudar.model.services.BookOrderService;
-import org.dudar.utils.LocaleMessage;
+import org.dudar.utils.locale.LocaleMessage;
 import org.dudar.utils.Validator;
 
 import javax.servlet.ServletException;

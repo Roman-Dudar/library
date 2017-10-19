@@ -6,43 +6,12 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@include file="header.jsp"%>
+<%@ taglib prefix="bookTable" uri="bookTable"%>
+
 
 
 <div class="container" align="center">
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <th>#</th>
-            <th><fmt:message key="library.bookDescription.title" bundle="${bundle}" /></th>
-            <th><fmt:message key="library.bookDescription.authors" bundle="${bundle}" /></th>
-            <th><fmt:message key="library.bookDescription.publisher" bundle="${bundle}" /></th>
-            <th><fmt:message key="library.bookDescription.genre" bundle="${bundle}" /></th>
-            <th><fmt:message key="library.bookDescription.availability" bundle="${bundle}" /></th>
-        </tr>
-        </thead>
-        <tbody>
-        <c:forEach items="${books}" var="book" varStatus="status">
-            <tr>
-                <td>${book.getId()}</td>
-                <td><a href="${pageContext.request.contextPath}/main/order?bookid=${book.getId()}">
-                        ${book.getTitle()}
-                </a></td>
-                <td>
-                    <c:forEach items="${book.getAuthors()}" var="author">
-                        <a href="${pageContext.request.contextPath}/main/search?author=${author.getId()}">
-                                ${author.getName()} ${author.getSurname()}
-                        </a><br/>
-                    </c:forEach>
-                </td>
-                <td>${book.getPublisher()}</td>
-                <td><a href="${pageContext.request.contextPath}/main/search?genre=${book.getGenre()}">
-                        ${book.getGenre()}
-                </a></td>
-                <td><fmt:message key="${book.getAvailability().getLocaleKey()}" bundle="${bundle}" /></td>
-            </tr>
-        </c:forEach>
-        </tbody>
-    </table>
+    <bookTable:books-table books="${books}" contextPath="${pageContext.request.contextPath}"></bookTable:books-table>
 </div>
 
 <ul class="pager">

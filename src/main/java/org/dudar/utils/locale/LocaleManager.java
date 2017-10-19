@@ -1,4 +1,4 @@
-package org.dudar.utils;
+package org.dudar.utils.locale;
 
 import java.util.Locale;
 import java.util.ResourceBundle;

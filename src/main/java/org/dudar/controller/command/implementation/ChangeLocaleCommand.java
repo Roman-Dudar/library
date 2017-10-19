@@ -4,7 +4,7 @@ import org.dudar.controller.command.Command;
 import org.dudar.controller.constants.LocaleEnum;
 import org.dudar.controller.constants.Page;
 import org.dudar.controller.constants.Parameters;
-import org.dudar.utils.LocaleManager;
+import org.dudar.utils.locale.LocaleManager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
