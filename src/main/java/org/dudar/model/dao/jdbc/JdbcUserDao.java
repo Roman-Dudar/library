@@ -3,6 +3,7 @@ package org.dudar.model.dao.jdbc;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import org.dudar.exception.DatabaseException;
 import org.dudar.model.dao.UserDao;
 import org.dudar.model.entity.User;
 import org.dudar.model.entity.enums.Role;
@@ -39,7 +40,8 @@ public class JdbcUserDao implements UserDao {
                 user.setId(keys.getLong(1));
             }
         } catch (SQLException e) {
-            LOGGER.error("JdbcUserDao create SQL exception", e);
+            LOGGER.error("Create SQL exception", e);
+            throw new DatabaseException(e);
         }
     }
 
@@ -55,7 +57,8 @@ public class JdbcUserDao implements UserDao {
             query.setLong(6, user.getId());
             query.executeUpdate();
         } catch (SQLException e) {
-            LOGGER.error("JdbcUserDao update SQL exception: " + user.getId(), e);
+            LOGGER.error("Update SQL exception: " + user.getId(), e);
+            throw new DatabaseException(e);
         }
     }
 
@@ -65,7 +68,8 @@ public class JdbcUserDao implements UserDao {
             query.setLong(1, user.getId());
             query.executeUpdate();
         } catch (SQLException e) {
-            LOGGER.error("JdbcUserDao delete SQL exception: " + user.getId(), e);
+            LOGGER.error("Delete SQL exception: " + user.getId(), e);
+            throw new DatabaseException(e);
         }
     }
 
@@ -77,7 +81,8 @@ public class JdbcUserDao implements UserDao {
             ResultSet resultSet = query.executeQuery();
             user = Optional.of(parseResultSet(resultSet));
         } catch (SQLException e) {
-            LOGGER.error("JdbcUserDao get by phone number SQL exception: " + id, e);
+            LOGGER.error("Get by phone number SQL exception: " + id, e);
+            throw new DatabaseException(e);
         }
         return user;
     }
@@ -92,7 +97,8 @@ public class JdbcUserDao implements UserDao {
                 user = Optional.of(parseResultSet(resultSet));
             }
         } catch (SQLException e) {
-            LOGGER.error("JdbcUserDao get by phone number SQL exception: " + phoneNumber, e);
+            LOGGER.error("Get by phone number SQL exception: " + phoneNumber, e);
+            throw new DatabaseException(e);
         }
         return user;
     }

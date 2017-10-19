@@ -3,6 +3,7 @@ package org.dudar.model.dao.jdbc;
 import org.apache.log4j.Logger;
 import org.apache.log4j.LogManager;
 
+import org.dudar.exception.DatabaseException;
 import org.dudar.model.dao.AuthorDao;
 import org.dudar.model.entity.Author;
 
@@ -40,6 +41,7 @@ public class JdbcAuthorDao implements AuthorDao {
             }
         } catch (SQLException e) {
             LOGGER.error("JDBCAuthorDAO create SQL exception", e);
+            throw new DatabaseException(e);
         }
     }
 
@@ -53,6 +55,7 @@ public class JdbcAuthorDao implements AuthorDao {
             query.executeUpdate();
         } catch (SQLException e) {
             LOGGER.error("JDBCAuthorDAO update SQL exception: " + author.getId(), e);
+            throw new DatabaseException(e);
         }
     }
 
@@ -63,6 +66,7 @@ public class JdbcAuthorDao implements AuthorDao {
             query.executeUpdate();
         } catch (SQLException e) {
             LOGGER.error("JdbcAuthorDao delete SQL exception: " + author.getId(), e);
+            throw new DatabaseException(e);
         }
     }
 
@@ -77,6 +81,7 @@ public class JdbcAuthorDao implements AuthorDao {
             }
         } catch (SQLException e) {
             LOGGER.error("JdbcAuthorDao get by ID SQL exception: " + id, e);
+            throw new DatabaseException(e);
         }
         return author;
     }
@@ -93,6 +98,7 @@ public class JdbcAuthorDao implements AuthorDao {
             }
         } catch (SQLException e) {
             LOGGER.error("JdbcAuthorDao get by surname beginning SQL exception: " + surnamePart, e);
+            throw new DatabaseException(e);
         }
         return authors;
     }
@@ -110,6 +116,7 @@ public class JdbcAuthorDao implements AuthorDao {
             }
         } catch (SQLException e) {
             LOGGER.error("JdbcAuthorDao get by book description id SQL exception", e);
+            throw new DatabaseException(e);
         }
         return authors;
     }

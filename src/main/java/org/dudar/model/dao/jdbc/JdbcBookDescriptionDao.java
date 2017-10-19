@@ -3,6 +3,7 @@ package org.dudar.model.dao.jdbc;
 import com.sun.org.apache.regexp.internal.RE;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.dudar.exception.DatabaseException;
 import org.dudar.model.dao.BookDescriptionDao;
 import org.dudar.model.entity.BookDescription;
 import org.dudar.model.entity.enums.Availability;
@@ -42,6 +43,7 @@ public class JdbcBookDescriptionDao implements BookDescriptionDao {
             }
         } catch (SQLException e){
             LOGGER.error("JdbcBookDescriptionDao create SQL exception", e);
+            throw new DatabaseException(e);
         }
     }
 
@@ -58,6 +60,7 @@ public class JdbcBookDescriptionDao implements BookDescriptionDao {
             query.executeUpdate();
         } catch (SQLException e){
             LOGGER.error("JdbcBookDescriptionDao update SQL exception", e);
+            throw new DatabaseException(e);
         }
     }
 
@@ -69,6 +72,7 @@ public class JdbcBookDescriptionDao implements BookDescriptionDao {
             query.executeUpdate();
         } catch (SQLException e){
             LOGGER.error("JdbcBookDescription delete SQL exception", e);
+            throw new DatabaseException(e);
         }
     }
 
@@ -83,6 +87,7 @@ public class JdbcBookDescriptionDao implements BookDescriptionDao {
             }
         } catch (SQLException e) {
             LOGGER.error("Get book description by id " + bookDescriptionId, e);
+            throw new DatabaseException(e);
         }
         return bookDescription;
     }
@@ -100,6 +105,7 @@ public class JdbcBookDescriptionDao implements BookDescriptionDao {
             }
         } catch (SQLException e) {
             LOGGER.error("Get book description pagination: limit = " + limit + ", offset = " + offset, e);
+            throw new DatabaseException(e);
         }
         return bookDescriptions;
     }

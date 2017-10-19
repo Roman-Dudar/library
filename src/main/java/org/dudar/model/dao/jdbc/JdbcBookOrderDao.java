@@ -3,6 +3,7 @@ package org.dudar.model.dao.jdbc;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import org.dudar.exception.DatabaseException;
 import org.dudar.model.dao.BookDescriptionDao;
 import org.dudar.model.dao.BookOrderDao;
 import org.dudar.model.entity.BookDescription;
@@ -43,7 +44,8 @@ public class JdbcBookOrderDao implements BookOrderDao{
                 bookOrder.setId(keys.getLong(1));
             }
         } catch (SQLException e){
-            LOGGER.error("JdbcBookOrderDao create SQL exception", e);
+            LOGGER.error("Create SQL exception", e);
+            throw new DatabaseException(e);
         }
     }
 
@@ -58,7 +60,8 @@ public class JdbcBookOrderDao implements BookOrderDao{
             query.setLong(5, bookOrder.getId());
             query.executeUpdate();
         } catch (SQLException e) {
-            LOGGER.error("JdbcBookOrderDao update SQL exception", e);
+            LOGGER.error("Update SQL exception", e);
+            throw new DatabaseException(e);
         }
     }
 
@@ -68,7 +71,8 @@ public class JdbcBookOrderDao implements BookOrderDao{
             query.setLong(1, bookOrder.getId());
             query.executeUpdate();
         } catch(SQLException e) {
-            LOGGER.error("JdbcBookOrderDao delete SQL exception", e);
+            LOGGER.error("Delete SQL exception", e);
+            throw new DatabaseException(e);
         }
     }
 
@@ -85,6 +89,7 @@ public class JdbcBookOrderDao implements BookOrderDao{
             }
         } catch(SQLException e) {
             LOGGER.error("Get order by id: " + orderId, e);
+            throw new DatabaseException(e);
         }
         return bookOrder;
     }
@@ -102,7 +107,8 @@ public class JdbcBookOrderDao implements BookOrderDao{
                 orders.add(parseResultSet(resultSet));
             }
         } catch(SQLException e) {
-            LOGGER.error("JdbcBookOrderDao get unreturned orders of user exception: " + userId, e);
+            LOGGER.error("Get unreturned orders of user exception: " + userId, e);
+            throw new DatabaseException(e);
         }
         return orders;
     }
@@ -122,7 +128,8 @@ public class JdbcBookOrderDao implements BookOrderDao{
                 orders.add(parseResultSet(resultSet));
             }
         } catch(SQLException e) {
-            LOGGER.error("JdbcBookOrderDao get orders by book description: " + bookDescriptionId, e);
+            LOGGER.error("Get orders by book description: " + bookDescriptionId, e);
+            throw new DatabaseException(e);
         }
         return orders;
     }
@@ -140,7 +147,8 @@ public class JdbcBookOrderDao implements BookOrderDao{
                 orders.add(parseResultSet(resultSet));
             }
         } catch(SQLException e) {
-            LOGGER.error("JdbcBookOrderDao get all orders of user exception: " + userId, e);
+            LOGGER.error("Get all orders of user exception: " + userId, e);
+            throw new DatabaseException(e);
         }
         return orders;
     }

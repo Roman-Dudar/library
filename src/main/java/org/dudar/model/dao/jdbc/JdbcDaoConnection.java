@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import org.dudar.exception.DatabaseException;
 import org.dudar.model.dao.DaoConnection;
 
 /**
@@ -39,6 +40,7 @@ public class JdbcDaoConnection implements DaoConnection {
             LOGGER.info("Transaction has began");
         } catch (SQLException e) {
             LOGGER.error("JdbcDaoConnection begin error", e);
+            throw new DatabaseException(e);
         }
     }
 
@@ -49,6 +51,7 @@ public class JdbcDaoConnection implements DaoConnection {
             LOGGER.info("Transaction is commited");
         } catch (SQLException e) {
             LOGGER.error("JdbcDaoConnection commit error", e);
+            throw new DatabaseException(e);
         }
     }
 
@@ -59,6 +62,7 @@ public class JdbcDaoConnection implements DaoConnection {
             LOGGER.info("Transaction is rollbacked");
         } catch (SQLException e) {
             LOGGER.error("JdbcDaoConnection rollback error", e);
+            throw new DatabaseException(e);
         }
     }
 

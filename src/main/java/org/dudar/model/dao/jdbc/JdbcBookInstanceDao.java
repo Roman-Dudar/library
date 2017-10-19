@@ -8,6 +8,7 @@ import java.util.Optional;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import org.dudar.exception.DatabaseException;
 import org.dudar.model.entity.BookDescription;
 import org.dudar.model.entity.BookInstance;
 import org.dudar.model.dao.BookInstanceDao;
@@ -42,7 +43,8 @@ public class JdbcBookInstanceDao implements BookInstanceDao {
                 bookInstance.setId(keys.getLong(1));
             }
         } catch (SQLException e) {
-            LOGGER.error("JdbcBookInstanceDao create SQL exception", e);
+            LOGGER.error("Create SQL exception", e);
+            throw new DatabaseException(e);
         }
     }
 
@@ -55,7 +57,8 @@ public class JdbcBookInstanceDao implements BookInstanceDao {
             query.executeUpdate();
 
         } catch (SQLException e) {
-            LOGGER.error("JdbcBookInstanceDao update SQL exception: " + bookInstance.getId(), e);
+            LOGGER.error("Update SQL exception: " + bookInstance.getId(), e);
+            throw new DatabaseException(e);
         }
     }
 
@@ -65,7 +68,8 @@ public class JdbcBookInstanceDao implements BookInstanceDao {
             query.setLong(1, bookInstance.getId());
             query.executeUpdate();
         } catch (SQLException e) {
-            LOGGER.error("JdbcBookInstanceDao delete SQL exception: " + bookInstance.getId(), e);
+            LOGGER.error("Delete SQL exception: " + bookInstance.getId(), e);
+            throw new DatabaseException(e);
         }
     }
 
@@ -79,7 +83,8 @@ public class JdbcBookInstanceDao implements BookInstanceDao {
                 bookInstance = Optional.of(parseResultSet(resultSet));
             }
         } catch (SQLException e) {
-            LOGGER.error("JdbcBookInstanceDao get by ID SQL exception: " + id, e);
+            LOGGER.error("Get by ID SQL exception: " + id, e);
+            throw new DatabaseException(e);
         }
         return bookInstance;
     }
@@ -94,7 +99,8 @@ public class JdbcBookInstanceDao implements BookInstanceDao {
                 instances.add(parseResultSet(resultSet, bookDescription));
             }
         } catch (SQLException e) {
-            LOGGER.error("JdbcBookInstanceDao getByBookDescription SQL exception: " + bookDescription.getId(), e);
+            LOGGER.error("Get by book description SQL exception: " + bookDescription.getId(), e);
+            throw new DatabaseException(e);
         }
         return instances;
     }
@@ -110,7 +116,8 @@ public class JdbcBookInstanceDao implements BookInstanceDao {
             bookOrder.getBookInstance().setBookDescription(
                     new BookDescription(resultSet.getLong("book_description_id")));
         } catch (SQLException e) {
-            LOGGER.error("JdbcBookInstanceDao get by book order SQL exception: " + bookOrder.getId(), e);
+            LOGGER.error("Get by book order SQL exception: " + bookOrder.getId(), e);
+            throw new DatabaseException(e);
         }
     }
 
@@ -132,6 +139,7 @@ public class JdbcBookInstanceDao implements BookInstanceDao {
             }
         } catch (SQLException e) {
             LOGGER.error("Get available book instance by book description ID SQL exception: " + bookDescriptionId, e);
+            throw new DatabaseException(e);
         }
         return bookInstance;
     }

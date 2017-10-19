@@ -2,8 +2,6 @@ package org.dudar.exception;
 
 public class DatabaseException extends RuntimeException{
 
-    //todo-Dmitry: throw exception and handle it !important
-
     private static final long serialVersionUID = 101L;
 
     public DatabaseException(String messageKey) {

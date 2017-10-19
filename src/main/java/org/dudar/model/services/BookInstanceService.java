@@ -49,7 +49,7 @@ public class BookInstanceService {
                 bookInstance.setStatus(status);
                 bookInstanceDao.update(bookInstance);
             } else {
-                throw new RuntimeException("Too late");//todo-Dmitry fix it later!
+                throw new RuntimeException("Too late");
             }
             connection.commit();
         }
