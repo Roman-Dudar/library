@@ -10,26 +10,26 @@ public class NameValidationTest {
 
     @Test
     public void testNameSuccess() {
-        String password = "Alex";
-        boolean isValid = Validator.getInstance().validatePassword(password);
+        String name = "Alex";
+        boolean isValid = Validator.getInstance().validateName(name);
         assertTrue(isValid);
     }
     @Test
     public void testMixedAlphabetNameFailure() {
-        String password = "Alекс";
-        boolean isValid = Validator.getInstance().validatePassword(password);
+        String name = "Alекс";
+        boolean isValid = Validator.getInstance().validateName(name);
         assertFalse(isValid);
     }
     @Test
     public void testCyrillicNameStartingWithSmallLetterFailure() {
-        String password = "алекс";
-        boolean isValid = Validator.getInstance().validatePassword(password);
+        String name = "алекс";
+        boolean isValid = Validator.getInstance().validateName(name);
         assertFalse(isValid);
     }
     @Test
     public void testNameStartingWithSmallLetterFailure() {
-        String password = "alex";
-        boolean isValid = Validator.getInstance().validatePassword(password);
+        String name = "alex";
+        boolean isValid = Validator.getInstance().validateName(name);
         assertFalse(isValid);
     }
 
