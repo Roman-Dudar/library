@@ -2,6 +2,7 @@ package org.dudar.model.services;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.dudar.model.dao.BookInstanceDao;
 import org.dudar.model.dao.BookOrderDao;
 import org.dudar.model.dao.DaoConnection;
 import org.dudar.model.dao.DaoFactory;
@@ -67,10 +68,16 @@ public class BookOrderService {
     }
 
     public void confirmReturn(BookOrder bookOrder) {
-        LOGGER.info("Confirm book return (set actual return date in book order) " + bookOrder.getId());// TODO: 10/19/17
-        try (BookOrderDao bookOrderDao = daoFactory.createBookOrderDao()) {
+        LOGGER.info("Confirm book return (set actual return date in book order) " + bookOrder.getId());
+        try (DaoConnection connection = daoFactory.getConnection()) {
+            BookOrderDao bookOrderDao = daoFactory.createBookOrderDao(connection);
+            BookInstanceDao bookInstanceDao = daoFactory.createBookInstanceDao(connection);
+            connection.begin();
             bookOrder.setActualReturnDate(Date.valueOf(LocalDate.now()));
             bookOrderDao.update(bookOrder);
+            bookOrder.getBookInstance().setStatus(Status.AVAILABLE);
+            bookInstanceDao.update(bookOrder.getBookInstance());
+            connection.commit();
         }
     }
 

@@ -151,7 +151,7 @@ public class JdbcBookInstanceDao implements BookInstanceDao {
     }
 
     static BookInstance parseResultSetWithAgregation(ResultSet resultSet) throws SQLException {
-        BookInstance bookInstance = new BookInstance.Builder().setId(resultSet.getLong("id"))
+        BookInstance bookInstance = new BookInstance.Builder().setId(resultSet.getLong("book_instance.id"))
                 .setStatus(Status.valueOf(resultSet.getString("status").toUpperCase()))
                 .setBookDescription(JdbcBookDescriptionDao.parseResultSet(resultSet)).build();
         do {
