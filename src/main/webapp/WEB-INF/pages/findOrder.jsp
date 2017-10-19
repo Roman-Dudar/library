@@ -22,6 +22,14 @@
 </div>
 
 
+<c:if test="${not empty success}">
+    <div class="alert alert-success" align="center">
+        <strong>
+            <fmt:message key="${success}" bundle="${bundle}" />
+        </strong>
+    </div>
+</c:if>
+
 <%@include file="error.jsp"%>
 
 <%@include file="footer.jsp"%>

@@ -1,6 +1,7 @@
 package org.dudar.controller.constants;
 
 public final class Parameters {
+
     /**
      * strings used as parameters in jsp pages
      */
@@ -20,6 +21,10 @@ public final class Parameters {
     public static String BOOK_ORDER = "order";
     public static String ORDER_ID = "order_id";
     public static String CONFIRM = "confirm";
+    public static String SUCCESS = "success";
+
+    public static String PICK_UP = "pick-up";
+    public static String RETURN = "return";
 
 
     private Parameters(){}

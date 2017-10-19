@@ -67,7 +67,7 @@ public class BookOrderService {
     }
 
     public void confirmReturn(BookOrder bookOrder) {
-        LOGGER.info("Confirm book return (set actual return date in book order) " + bookOrder.getId());
+        LOGGER.info("Confirm book return (set actual return date in book order) " + bookOrder.getId());// TODO: 10/19/17
         try (BookOrderDao bookOrderDao = daoFactory.createBookOrderDao()) {
             bookOrder.setActualReturnDate(Date.valueOf(LocalDate.now()));
             bookOrderDao.update(bookOrder);

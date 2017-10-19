@@ -9,6 +9,7 @@
 
 
 <div class="container" align="center">
+    <form action="./confirmOrder" method="POST" role="form">
     <div class="form-group">
         <label for="confirm"><fmt:message key="library.order.confirm" bundle="${bundle}"/></label>
         <select class="form-control" id="confirm" name="confirm">
@@ -25,7 +26,9 @@
     <div class="form-group">
         <button type="submit" class="btn btn-default"><fmt:message key="library.button.submit" bundle="${bundle}"/></button>
     </div>
+    </form>
 </div>
+
 
 
 <%@include file="error.jsp"%>
