@@ -11,8 +11,8 @@
     <h2><fmt:message key="library.bookDescription.add" bundle="${bundle}" /></h2>
     <form action="./addBook" method="POST" role="form">
         <div class="form-group">
-            <label for="title"><fmt:message key="library.bookDescription.title" bundle="${bundle}" />:</label>
-            <input type="text" class="form-control" id="title" placeholder=<fmt:message key="library.bookDescription.title" bundle="${bundle}" /> name="title">
+            <label for="book_title"><fmt:message key="library.bookDescription.title" bundle="${bundle}" />:</label>
+            <input type="text" class="form-control" id="book_title" placeholder=<fmt:message key="library.bookDescription.title" bundle="${bundle}" /> name="book_title">
         </div>
         <div class="form-group">
             <label for="isbn">ISBN:</label>

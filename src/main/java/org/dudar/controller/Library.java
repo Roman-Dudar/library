@@ -18,19 +18,7 @@ public class Library extends HttpServlet{
     private static final long serialVersionUID = 1L;
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    private void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Command command = CommandFactory.getCommand(request);
         String resultPath = command.execute(request, response);
         request.getRequestDispatcher(resultPath).forward(request, response);

@@ -31,19 +31,14 @@ public class Validator {
         return validate(name, nameRegex);
     }
 
-    private boolean validate(String str, String strRegex){
+    public boolean validateIsbn(String Isbn) {
+        return true; // TODO: 10/23/17  
+    }
+
+    private boolean validate(String str, String strRegex) {
         if (str == null || !str.matches(strRegex)) {
             return false;
         }
         return true;
-    }
-
-    public boolean validateTitle(String title) {
-        title += " ";
-        String ukrainianOrRussianWord = "([А-ЯІЇЄ]?[а-яіїє]*'?[а-яіїє]+)";
-        String englishWord = "([A-Z]?[a-z]+)";
-        String titleRegex = "((" + ukrainianOrRussianWord + "|" + englishWord + ")+ )+";
-        title.matches(titleRegex);
-        return validate(title,titleRegex);
     }
 }

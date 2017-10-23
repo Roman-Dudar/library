@@ -20,12 +20,7 @@ public class PostSearchBookCommand implements Command{
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String title = request.getParameter(Parameters.BOOK_TITLE);
         request.setAttribute(Parameters.SEARCH_BY, title);
-        List<BookDescription> books = null;
-        if (true){//Validator.getInstance().validateName(title)) {
-           books = BookDescriptionService.getInstance().getBookDescriptionByTitle(title);
-        } else {
-            request.setAttribute(Parameters.ERROR, LocaleMessage.INVALID_INPUT);
-        }
+        List<BookDescription> books = BookDescriptionService.getInstance().getBookDescriptionByTitle(title);
         if (books != null && !books.isEmpty()) {
             request.setAttribute(Parameters.BOOKS, books);
         } else {

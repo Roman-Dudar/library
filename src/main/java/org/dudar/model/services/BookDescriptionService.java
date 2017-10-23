@@ -44,6 +44,7 @@ public class BookDescriptionService {
     }
 
     public List<BookDescription> getBookDescription(int pageNumber){
+        LOGGER.info("Get book descriptions for page #" + pageNumber);
         int limit = DaoFactory.LIMIT;
         int offset = (pageNumber - 1) * limit;
         List<BookDescription> books;
