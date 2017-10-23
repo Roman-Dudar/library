@@ -27,6 +27,7 @@
             <input type="text" class="form-control" id="genre" placeholder=<fmt:message key="library.bookDescription.genre" bundle="${bundle}"/> name="genre">
         </div>
         <div class="form-group">
+            <label for="availability"><fmt:message key="library.bookDescription.availability" bundle="${bundle}" />:</label>
             <select class="form-control" id="availability" name="availability">
                 <option value="subscription"><fmt:message key="library.availability.subscription" bundle="${bundle}"/></option>
                 <option value="reading_room"><fmt:message key="library.availability.reading_room" bundle="${bundle}"/></option>

@@ -6,7 +6,9 @@ import org.dudar.controller.constants.Parameters;
 import org.dudar.model.entity.Author;
 import org.dudar.model.entity.BookDescription;
 import org.dudar.model.entity.enums.Availability;
+import org.dudar.model.services.BookDescriptionService;
 import org.dudar.utils.Validator;
+import org.dudar.utils.locale.LocaleManager;
 import org.dudar.utils.locale.LocaleMessage;
 
 import javax.servlet.ServletException;
@@ -15,12 +17,15 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 
 public class PostAddBookCommand implements Command{
 
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (validateInput(request)) {
-            // TODO: 10/23/17 add book
+            BookDescription bookDescription = getUserInput(request);
+            BookDescriptionService.getInstance().addBookDescription(bookDescription);
+            // TODO: 10/24/17 implement adding authors!!
         }
         return Page.ADD_BOOK;
     }
@@ -37,7 +42,7 @@ public class PostAddBookCommand implements Command{
 
     private List<Author> parseAuthors(HttpServletRequest request) {
         List<Author> authors = new LinkedList<Author>();
-        String authorsStr[] = request.getParameter(Parameters.AUTHORS).split("\n");
+        String[] authorsStr = request.getParameter(Parameters.AUTHORS).split("\n");
         for (String authorStr : authorsStr) {
             String[] author = authorStr.split(" ");
             switch (author.length) {
@@ -58,13 +63,50 @@ public class PostAddBookCommand implements Command{
 
     private boolean validateInput(HttpServletRequest request) {
         Validator validator = Validator.getInstance();
-        String error ;
-        if (validator.validateIsbn(request.getParameter(Parameters.ISBN))) {
+        Locale locale = (Locale) request.getSession().getAttribute(Parameters.LOCALE);
+        String error = null;
+        if (!validator.validateIsbn(request.getParameter(Parameters.ISBN))) {
+            error = buildErrorMessage(error, locale, LocaleMessage.ISBN);
+        }
+        if (!validator.validateGenre(request.getParameter(Parameters.GENRE))) {
+            error = buildErrorMessage(error, locale, LocaleMessage.GENRE);
+        }
+        if (!validator.validateTitle(request.getParameter(Parameters.BOOK_TITLE))) {
+            error = buildErrorMessage(error, locale, LocaleMessage.TITLE);
+        }
+        if (!validateAuthors(request, validator)) {
+            error = buildErrorMessage(error, locale, LocaleMessage.AUTHORS);
+        }
+        return error == null;
+    }
 
+    private boolean validateAuthors(HttpServletRequest request, Validator validator) {
+        String authorsStr = request.getParameter(Parameters.AUTHORS);
+        String[] authors;
+        if (authorsStr == null || authorsStr.isEmpty()) {
+            return false;
+        }
+        authors = authorsStr.split("\n");
+        for (String authorStr : authors) {
+            String[] author = authorStr.split(" ");
+            for (String authorPart : author) {
+                if (!validator.validateName(authorPart)) {
+                    return false;
+                }
+            }
         }
         return true;
     }
 
-//    private String buildErrorMessage(String error){}
+    private String buildErrorMessage(String error, Locale locale, String messageKey){
+        LocaleManager.setResourceBundleLocale(locale);
+        if ((error == null || error.length() == 0)) {
+            error = LocaleManager.getString(LocaleMessage.INVALID_INPUT) + ": "
+                    + LocaleManager.getString(messageKey);
+        } else {
+            error += ", " + LocaleManager.getString(messageKey);
+        }
+        return error;
+    }
 
 }

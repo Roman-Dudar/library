@@ -31,8 +31,19 @@ public class Validator {
         return validate(name, nameRegex);
     }
 
-    public boolean validateIsbn(String Isbn) {
-        return true; // TODO: 10/23/17  
+    public boolean validateGenre(String genre) {
+        String genreRegex = "^([А-ЯІЇЄ][а-яіїє]*'?[а-яіїє]+)|([A-Z][a-z]+)( (([а-яіїє]*'?[а-яіїє]+)|([a-z]+)))*$";
+        return validate(genre, genreRegex);
+    }
+
+    public boolean validateIsbn(String isbn) {
+        String isbnRegex = "\\d{1,3}-(\\d-)?\\d{1,7}-\\d{1,7}-\\d{1,3}";
+        return validate(isbn, isbnRegex);
+    }
+
+    public boolean validateTitle(String title) {
+        String titleRegex = "^.+$";
+        return validate(title, titleRegex);
     }
 
     private boolean validate(String str, String strRegex) {

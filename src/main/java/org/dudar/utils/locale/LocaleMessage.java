@@ -15,6 +15,7 @@ public class LocaleMessage {
     public static String GENRE = "library.bookDescription.genre";
     public static String AVAILABILITY = "library.bookDescription.availability";
     public static String BOOKS_NOT_FOUND = "library.bookDescription.notFound";
+    public static String ISBN = "library.bookDescription.isbn";
 
 
     private LocaleMessage() {}

@@ -33,7 +33,7 @@ public class BookDescriptionService {
         this.daoFactory = daoFactory;
     }
     
-    public void createBookDescription(BookDescription bookDescription) {
+    public void addBookDescription(BookDescription bookDescription) {
         LOGGER.info("Create BookDescription: " + bookDescription.getTitle());
         try (DaoConnection connection = daoFactory.getConnection()) {
             connection.begin();
