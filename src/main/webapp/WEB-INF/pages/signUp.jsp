@@ -35,14 +35,9 @@
             <fmt:message key="library.user_id" bundle="${bundle}"/>: "${user_id}".
         </div>
     </c:if>
-
-    <c:if test="${not empty error}">
-        <div class="alert alert-danger">
-            <fmt:message key="${error}" bundle="${bundle}"/>
-        </div>
-    </c:if>
-
 </div>
 
+
+<%@include file="error.jsp"%>
 
 <%@include file="footer.jsp"%>

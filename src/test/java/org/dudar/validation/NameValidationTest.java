@@ -32,6 +32,12 @@ public class NameValidationTest {
         boolean isValid = Validator.getInstance().validateName(name);
         assertFalse(isValid);
     }
+    @Test
+    public void tesUkrainianNameSuccess() {
+        String name = "В'ячеслав";
+        boolean isValid = Validator.getInstance().validateName(name);
+        assertTrue(isValid);
+    }
 
 
 }

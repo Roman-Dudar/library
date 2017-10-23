@@ -8,6 +8,7 @@ import org.dudar.model.dao.BookDescriptionDao;
 import org.dudar.model.entity.BookDescription;
 import org.dudar.model.entity.enums.Availability;
 
+import javax.swing.text.html.Option;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -110,6 +111,23 @@ public class JdbcBookDescriptionDao implements BookDescriptionDao {
         return bookDescriptions;
     }
 
+    public List<BookDescription> getByTitle(String title) {
+        String getByTitleQuery = "SELECT * FROM book_description WHERE title like ?";
+        List<BookDescription> books = new ArrayList<>();
+        title = "%" + title + "%";
+        try (PreparedStatement query = connection.prepareStatement(getByTitleQuery)) {
+            query.setString(1, title);
+            ResultSet resultSet = query.executeQuery();
+            while (resultSet.next()) {
+                books.add(parseResultSet(resultSet));
+            }
+        } catch (SQLException e) {
+            LOGGER.error("Get book descriptions by title", e);
+            throw new DatabaseException(e);
+        }
+        return books;
+    }
+
     protected static BookDescription parseResultSet(ResultSet resultSet) throws SQLException {
         return new BookDescription.Builder().setId(resultSet.getLong("book_description.id"))
                 .setIsbn(resultSet.getString("isbn"))
@@ -127,3 +145,26 @@ public class JdbcBookDescriptionDao implements BookDescriptionDao {
         }
     }
 }
+
+
+
+//    SELECT book_description.id, isbn, title, publisher, genre, availability, author.id, "
+//        + "name, patronymic, surname FROM book_description JOIN m2m_book_author ON "
+//        + "book_description.id = m2m_book_author.book_description_id JOIN author ON "
+//        + "m2m_book_author.author_id = author.id WHERE title LIKE ?"
+
+
+
+//    protected static List<BookDescription> parseResultSetWithAuthors(ResultSet resultSet) throws SQLException {
+//        List<BookDescription> books = new ArrayList<>();
+//        BookDescription book = new BookDescription.Builder().setId(resultSet.getLong("book_description.id"))
+//                .setIsbn(resultSet.getString("isbn"))
+//                .setGenre(resultSet.getString("genre"))
+//                .setAvailability(Availability.valueOf(resultSet.getString("availability").toUpperCase()))
+//                .setPublisher(resultSet.getString("publisher"))
+//                .setAuthors(new ArrayList<>())
+//                .build();
+//        book.addAuthor(JdbcAuthorDao.parseResultSet(resultSet));
+//        while ()
+//            return books;
+//    }

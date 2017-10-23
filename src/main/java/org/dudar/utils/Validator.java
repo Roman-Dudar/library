@@ -27,7 +27,7 @@ public class Validator {
     }
 
     public boolean validateName(String name) {
-        String nameRegex = "^([А-Я][а-я]+)|([A-Z][a-z]+)$";
+        String nameRegex = "^([А-ЯІЇЄ][а-яіїє]*'?[а-яіїє]+)|([A-Z][a-z]+)$";
         return validate(name, nameRegex);
     }
 
@@ -36,5 +36,14 @@ public class Validator {
             return false;
         }
         return true;
+    }
+
+    public boolean validateTitle(String title) {
+        title += " ";
+        String ukrainianOrRussianWord = "([А-ЯІЇЄ]?[а-яіїє]*'?[а-яіїє]+)";
+        String englishWord = "([A-Z]?[a-z]+)";
+        String titleRegex = "((" + ukrainianOrRussianWord + "|" + englishWord + ")+ )+";
+        title.matches(titleRegex);
+        return validate(title,titleRegex);
     }
 }

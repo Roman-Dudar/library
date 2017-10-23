@@ -8,4 +8,6 @@ public interface BookDescriptionDao extends GenericDao<BookDescription> {
 
     List<BookDescription> getBookDescription(int limit, int offset);
 
+    List<BookDescription> getByTitle(String title);
+
 }

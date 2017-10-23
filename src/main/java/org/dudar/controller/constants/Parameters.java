@@ -22,6 +22,9 @@ public final class Parameters {
     public static String ORDER_ID = "order_id";
     public static String CONFIRM = "confirm";
     public static String SUCCESS = "success";
+    public static String BOOK_TITLE = "book_title";
+    public static String SEARCH_BY = "search_by";
+
 
     public static String PICK_UP = "pick-up";
     public static String RETURN = "return";

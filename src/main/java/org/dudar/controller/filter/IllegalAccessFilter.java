@@ -58,6 +58,8 @@ public class IllegalAccessFilter implements Filter {
 
     private boolean isPublicPage(String url) {
         switch(url) {
+            case UrlMap.SEARCH_BOOK:
+            case UrlMap.LOGOUT:
             case UrlMap.MAIN:
             case UrlMap.LOGIN:
             case UrlMap.CATALOG:
@@ -75,6 +77,7 @@ public class IllegalAccessFilter implements Filter {
 
     private boolean isLibrarianPage(String url) {
         switch(url) {
+            case UrlMap.ADD_BOOK:
             case UrlMap.FIND_ORDER:
             case UrlMap.CONFIRM_ORDER:
             case UrlMap.SIGN_UP: return true;

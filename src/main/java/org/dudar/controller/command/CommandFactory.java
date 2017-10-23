@@ -2,7 +2,7 @@ package org.dudar.controller.command;
 
 import org.dudar.controller.command.implementation.*;
 import org.dudar.controller.command.implementation.account.*;
-import org.dudar.controller.command.implementation.catalog.GetCatalogCommand;
+import org.dudar.controller.command.implementation.catalog.*;
 import org.dudar.controller.command.implementation.order.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -36,6 +36,10 @@ public class CommandFactory {
         commands.put("POST:findOrder", new PostFindOrderCommand());
         commands.put("GET:confirmOrder", new GetConfirmOrderCommand());
         commands.put("POST:confirmOrder", new PostConfirmOrderCommand());
+        commands.put("GET:searchBook", new GetSearchBookCommand());
+        commands.put("POST:searchBook", new PostSearchBookCommand());
+        commands.put("GET:addBook", new GetAddBookCommand());
+        commands.put("POST:addBook", new PostAddBookCommand());
     }
 
 

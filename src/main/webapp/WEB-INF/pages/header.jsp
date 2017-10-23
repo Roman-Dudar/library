@@ -43,7 +43,7 @@
             <li><a href="${pageContext.request.contextPath}/main/catalog?page=1">
                 <fmt:message key="library.button.catalog" bundle="${bundle}"/>
             </a></li>
-            <li><a class="nav-link disabled">
+            <li><a href="${pageContext.request.contextPath}/main/searchBook">
                 <fmt:message key="library.button.search" bundle="${bundle}"/>
             </a></li>
             <c:if test="${user.getRole().name() == 'LIBRARIAN'}">
@@ -53,6 +53,10 @@
 
                 <li><a href="${pageContext.request.contextPath}/main/findOrder">
                     <fmt:message key="library.order.find" bundle="${bundle}"/>
+                </a></li>
+
+                <li><a href="${pageContext.request.contextPath}/main/addBook">
+                    <fmt:message key="library.bookDescription.add" bundle="${bundle}"/>
                 </a></li>
             </c:if>
         </ul>
