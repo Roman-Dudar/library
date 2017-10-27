@@ -17,6 +17,7 @@ RUN set -x \
     && rm tomcat.tar.gz*
 
 ADD ./target/*.war $CATALINA_HOME/webapps/ROOT.war
+RUN rm -rf $CATALINA_HOME/webapps/ROOT
 
 EXPOSE 8080
 CMD ["catalina.sh", "run"]
