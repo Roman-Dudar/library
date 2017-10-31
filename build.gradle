@@ -1,0 +1,27 @@
+apply plugin: 'java'
+apply plugin: 'war'
+
+group = 'org.dudar'
+version = '1.0-SNAPSHOT'
+
+description = """"""
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+tasks.withType(JavaCompile) {
+	options.encoding = 'UTF-8'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'log4j:log4j:1.2.12'
+    compile 'mysql:mysql-connector-java:5.1.44'
+    compile 'javax.servlet:jstl:1.2'
+    testCompile 'junit:junit:4.12'
+    compileOnly 'javax.servlet:javax.servlet-api:3.1.0'
+    compileOnly 'javax.servlet.jsp:jsp-api:2.2'
+}
