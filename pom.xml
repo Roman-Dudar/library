@@ -4,17 +4,17 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.dudar</groupId>
   <artifactId>Library</artifactId>
-  <version>1.0.95</version>
+  <version>1.0.96</version>
   <packaging>war</packaging>
   <properties>
     <mysql.connector.version>5.1.44</mysql.connector.version>
     <javax.servlet.api.version>3.1.0</javax.servlet.api.version>
     <log4j.version>1.2.12</log4j.version>
-    <jsp.api.version>2.2</jsp.api.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <jstl.version>1.2</jstl.version>
-    <mockito.all.version>1.10.19</mockito.all.version>
+    <jsp.api.version>2.2</jsp.api.version>
     <junit.version>4.12</junit.version>
+    <mockito.all.version>1.10.19</mockito.all.version>
+    <jstl.version>1.2</jstl.version>
   </properties>
   <dependencies>
     <dependency>
