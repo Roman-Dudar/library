@@ -12,11 +12,11 @@ phases:
       - export $(printf 'PROJECT_VERSION=${project.version}' | mvn help:evaluate | grep ^PROJECT_VERSION=)
   build:
     commands:
-      - echo Initiating build sequence, sounds cool :-)
+      - echo Initiating build sequence
       - mvn clean verify
   post_build:
     commands:
-      - echo Build completed in $(( $( date +%s ) - START_TIME ))
+      - echo Build completed in $(( $( date +%s ) - START_TIME ))s
 
 artifacts:
   files:
