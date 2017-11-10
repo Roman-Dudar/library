@@ -14,7 +14,7 @@ phases:
     commands:
       - echo Initiating build sequence, sounds cool :-)
       - mvn clean verify
-  postbuild:
+  post_build:
     commands:
       - echo Build completed in $(( $( date +%s ) - START_TIME ))
 
