@@ -5,7 +5,8 @@ phases:
     commads:
       - echo Installing JDK and maven..
       - apt-get update -y
-      - apt-get install -y openjdk-8-jdk maven
+      - apt-get install -y openjdk-8-jdk
+      - apt-get install -y maven
   pre_build:
     commands:
       - echo Logging into ECR
