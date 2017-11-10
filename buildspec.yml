@@ -3,9 +3,10 @@ version: 0.2
 phases:
   install:
     commads:
+      - export START_TIME=$( date +%s )
+      - echo STARTING TIME = $START_TIME
       - echo Installing maven..
       - apt-get update -y && apt-get install -y maven
-      - export START_TIME=$( date +%s )
   pre_build:
     commands:
       - echo Exporting PROJECT_VERSION from pom.xml
