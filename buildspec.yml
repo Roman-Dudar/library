@@ -2,17 +2,21 @@
 version: 0.2
 phases:
   install:
-    - echo Installing maven..
-    - apt-get update -y && apt-get install -y maven
-    - export START_TIME=$( date +%s )
+    commads:
+      - echo Installing maven..
+      - apt-get update -y && apt-get install -y maven
+      - export START_TIME=$( date +%s )
   pre_build:
-    - echo Exporting PROJECT_VERSION from pom.xml
-    - export $(printf 'PROJECT_VERSION=${project.version}' | mvn help:evaluate | grep ^PROJECT_VERSION=)
+    commands:
+      - echo Exporting PROJECT_VERSION from pom.xml
+      - export $(printf 'PROJECT_VERSION=${project.version}' | mvn help:evaluate | grep ^PROJECT_VERSION=)
   build:
-    - echo Initiating build sequence, sounds cool :-)
-    - mvn clean verify
+    commands:
+      - echo Initiating build sequence, sounds cool :-)
+      - mvn clean verify
   postbuild:
-    - echo Build completed in $(( $( date +%s ) - START_TIME ))
+    commands:
+      - echo Build completed in $(( $( date +%s ) - START_TIME ))
 
 artifacts:
   files:
