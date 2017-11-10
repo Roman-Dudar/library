@@ -3,21 +3,29 @@ version: 0.2
 phases:
   install:
     commads:
-      - echo Installing maven..
-      - apt-get update -y && apt-get install -y maven
+      - echo Installing JDK and maven..
+      - apt-get update -y
+      - apt-get install -y maven openjdk-8-jdk
   pre_build:
     commands:
+      - echo Logging into ECR
+      - $(aws ecr get-login --region eu-central-1)
       - export START_TIME=$( date +%s )
       - echo STARTING TIME = $START_TIME
       - echo Exporting PROJECT_VERSION from pom.xml
       - export $(printf 'PROJECT_VERSION=${project.version}' | mvn help:evaluate | grep ^PROJECT_VERSION=)
   build:
     commands:
-      - echo Initiating build sequence
+      - echo Initiating maven build sequence
       - mvn clean verify
+      - echo Building docker image
+      - docker build -t library:$PROJECT_VERSION .
+      - docker tag library:$PROJECT_VERSION 997272741948.dkr.ecr.eu-central-1.amazonaws.com/library:$PROJECT_VERSION
   post_build:
     commands:
       - echo Build completed in $(( $( date +%s ) - START_TIME ))s
+      - echo Pushing docker image into ECR
+      - docker push 997272741948.dkr.ecr.eu-central-1.amazonaws.com/library:$PROJECT_VERSION
 
 artifacts:
   files:
