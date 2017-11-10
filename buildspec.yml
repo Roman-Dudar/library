@@ -4,9 +4,6 @@ phases:
   install:
     commads:
       - echo Installing JDK and maven..
-      - apt-get update -y
-      - apt-get install -y openjdk-8-jdk
-      - apt-get install -y maven
   pre_build:
     commands:
       - echo Logging into ECR
@@ -18,6 +15,9 @@ phases:
   build:
     commands:
       - echo Initiating maven build sequence
+      - apt-get update -y
+      - apt-get install -y openjdk-8-jdk
+      - apt-get install -y maven
       - mvn clean verify
       - echo Building docker image
       - docker build -t library:$PROJECT_VERSION .
