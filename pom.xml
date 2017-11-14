@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.dudar</groupId>
   <artifactId>Library</artifactId>
-  <version>1.0.96</version>
+  <version>1.0.97</version>
   <packaging>war</packaging>
   <properties>
     <mysql.connector.version>5.1.44</mysql.connector.version>

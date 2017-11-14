@@ -21,8 +21,3 @@ phases:
       - echo Build completed in $(( $( date +%s ) - START_TIME ))s
       - echo Pushing docker image into ECR
       - docker push 997272741948.dkr.ecr.eu-central-1.amazonaws.com/library:$PROJECT_VERSION
-
-artifacts:
-  files:
-    - target/Library-$PROJECT_VERSION.war
-  discard-paths: yes
