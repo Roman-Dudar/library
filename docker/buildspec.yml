@@ -7,9 +7,7 @@ phases:
       - $(aws ecr get-login --region eu-central-1)
       - export START_TIME=$( date +%s )
       - echo STARTING TIME = $START_TIME
-      - mkdir target && cd target
       - export PROJECT_VERSION=$(ls Library-*.war | sed -e "s/^Library-//; s/.war$//")
-      - cd ..
   build:
     commands:
       - echo Building docker image
