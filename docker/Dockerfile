@@ -16,7 +16,7 @@ RUN set -x \
     && rm bin/*.bat \
     && rm tomcat.tar.gz*
 
-ADD ./target/*.war webapps/ROOT.war
+ADD Library-*.war webapps/ROOT.war
 RUN rm -rf $CATALINA_HOME/webapps/ROOT
 
 EXPOSE 8080

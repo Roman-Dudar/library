@@ -19,5 +19,7 @@ phases:
 artifacts:
   files:
     - target/Library-$PROJECT_VERSION.war
+    - docker/buildspec.yml
+    - docker/Dockerfile
   discard-paths: yes
 

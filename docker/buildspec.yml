@@ -8,13 +8,12 @@ phases:
       - export START_TIME=$( date +%s )
       - echo STARTING TIME = $START_TIME
       - mkdir target && cd target
-      - aws s3 cp s3://codepipeline-eu-central-1-742796003201/library-devops-demo/MyAppBuild/UGpRtTF something.zip && unzip something.zip && rm something.zip
       - export PROJECT_VERSION=$(ls Library-*.war | sed -e "s/^Library-//; s/.war$//")
       - cd ..
   build:
     commands:
       - echo Building docker image
-      - docker build -f docker/Dockerfile -t library:$PROJECT_VERSION .
+      - docker build -f Dockerfile -t library:$PROJECT_VERSION .
       - docker tag library:$PROJECT_VERSION 997272741948.dkr.ecr.eu-central-1.amazonaws.com/library:$PROJECT_VERSION
   post_build:
     commands:
