@@ -4,7 +4,7 @@ phases:
   pre_build:
     commands:
       - echo Logging into ECR
-      - $(aws ecr get-login --region eu-central-1)
+      - $(aws ecr get-login --region eu-central-1 --no-include-email)
       - export START_TIME=$( date +%s )
       - echo STARTING TIME = $START_TIME
       - echo Exporting PROJECT_VERSION from pom.xml
