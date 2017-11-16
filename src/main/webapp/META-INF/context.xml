@@ -3,5 +3,5 @@
     <Resource name="jdbc/library" auth="Container"
               type="javax.sql.DataSource" maxTotal="50" maxIdle="30" maxWaitMillis="1000"
               username="root" password="vdf4pbcd" driverClassName="com.mysql.jdbc.Driver"
-              url="jdbc:mysql://localhost/library?useUnicode=true&amp;characterEncoding=UTF-8" />
+              url="jdbc:mysql://somedbinstance.cnats8yagrdy.eu-central-1.rds.amazonaws.com/library?useUnicode=true&amp;characterEncoding=UTF-8" />
 </Context>
