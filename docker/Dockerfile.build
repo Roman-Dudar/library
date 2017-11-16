@@ -1,8 +1,5 @@
-FROM java:8-jdk
+FROM maven:3-jdk-8
 
-RUN apt-get update -y \
-    && apt-get install -y --no-install-recommends maven
-    
 RUN mkdir -p /opt
 WORKDIR /opt
 COPY . ./
