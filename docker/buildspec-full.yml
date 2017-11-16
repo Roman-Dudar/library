@@ -3,7 +3,6 @@ version: 0.2
 phases:
   pre_build:
     commands:
-      - apt-get update -y && apt-get install -y xmlstarlet
       - echo Logging into ECR
       - $(aws ecr get-login --region eu-central-1)
       - export START_TIME=$( date +%s )
