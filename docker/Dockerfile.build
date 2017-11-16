@@ -1,4 +1,4 @@
-FROM java:8-jdk as builder
+FROM java:8-jdk
 
 RUN apt-get update -y \
     && apt-get install -y --no-install-recommends maven
@@ -28,7 +28,7 @@ RUN set -x \
     && rm bin/*.bat \
     && rm tomcat.tar.gz*
 
-COPY --from=builder /opt/target/Library*.war webapps/ROOT.war
+COPY --from=0 /opt/target/Library*.war webapps/ROOT.war
 RUN rm -rf $CATALINA_HOME/webapps/ROOT
 RUN rm -rf /opt
 
