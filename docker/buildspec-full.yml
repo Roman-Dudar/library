@@ -8,7 +8,9 @@ phases:
       - export START_TIME=$( date +%s )
       - echo STARTING TIME = $START_TIME
       - echo Exporting PROJECT_VERSION from pom.xml
-      - export $(printf 'PROJECT_VERSION=${project.version}' | mvn help:evaluate | grep ^PROJECT_VERSION=)
+      - export PROJECT_VERSION=$(python -c "import xml.etree.ElementTree as ET; \
+  print(ET.parse(open('pom.xml')).getroot().find( \
+  '{http://maven.apache.org/POM/4.0.0}version').text)")
   build:
     commands:
       - echo Building docker image
